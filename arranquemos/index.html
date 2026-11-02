@@ -1,0 +1,604 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}img{max-width:100%}</style>
+<title>Arranquemos · Gabriel Asa</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Cargá la información de tu negocio para que arranquemos tu página web.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wdth,wght@62..125,400..800&display=swap">
+<style>
+/* Layout: la "orden de trabajo" de la página de servicios convertida en formulario. Negro de taller arriba, hoja clara con casilleros para completar. Acento rosa = servicio de páginas web. */
+:root{
+  --ink:#0a0b0d; --ink-2:#14161a; --rule:#2b2e35;
+  --paper:#e8e9eb; --paper-2:#f4f4f5; --paper-rule:#b9bcc2;
+  --fg:#f3f2ee; --muted:#9fa3ab; --ink-muted:#4a4e57;
+  --web:#ff4d8d; --maps:#ffc21a; --pc:#2bd67b; --vinilo:#19b5fe; --remeras:#ff7a1a; --wa:#25d366;
+  --display:"Anton","Impact","Arial Narrow",sans-serif;
+  --body:"Archivo","Helvetica Neue",Arial,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--ink);color:var(--fg);font-family:var(--body);font-size:1rem;line-height:1.55}
+a{color:inherit}
+h1,h2,h3{font-family:var(--display);font-weight:400;text-transform:uppercase;line-height:.95;margin:0;text-wrap:balance}
+p{margin:0}
+.wrap{max-width:980px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.lbl{font-stretch:125%;font-weight:700;font-size:.8125rem;text-transform:uppercase;letter-spacing:.08em}
+:focus-visible{outline:2px solid var(--web);outline-offset:3px}
+
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--ink)}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--ink);border-bottom:1px solid var(--rule)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:12px}
+.brand{font-family:var(--display);font-size:1.35rem;text-transform:uppercase;text-decoration:none;display:flex;align-items:center;gap:10px}
+.brand i{display:flex;gap:3px}.brand i b{width:5px;height:18px;display:block}
+.nav .back{color:var(--muted);text-decoration:none;font-size:.85rem}
+
+
+.hero{padding-block:40px 48px}
+.hero-top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px 24px;color:var(--muted);border-bottom:1px dashed var(--rule);padding-bottom:14px}
+.hero h1{font-size:clamp(3.2rem,13vw,7.5rem);line-height:.9;margin-top:22px}
+.sticker{display:inline-block;background:var(--web);color:var(--ink);padding:.02em .14em .06em;transform:rotate(-2deg)}
+.lead{font-size:1.15rem;color:var(--muted);max-width:56ch;margin-top:26px}
+.lead strong{color:var(--fg);font-weight:600}
+.steps{list-style:none;margin:32px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;counter-reset:s}
+.steps li{counter-increment:s;display:flex;flex-direction:column;gap:6px;border-top:2px solid var(--rule);padding-top:18px;color:var(--muted);font-size:.92rem}
+.steps li::before{content:counter(s);font-family:var(--display);font-size:2rem;line-height:1;color:var(--web)}
+.steps strong{color:var(--fg)}
+@media (max-width:720px){.steps{grid-template-columns:1fr 1fr}}
+
+.sheet-wrap{background:var(--paper);color:var(--ink);padding-block:56px 72px}
+.sheet{border:2px solid var(--ink);background:var(--paper)}
+.sheet-top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px 24px;padding:14px 20px;background:var(--ink);color:var(--paper)}
+.sheet-top .lbl:last-child{color:var(--web)}
+.progress{height:6px;background:var(--paper-rule)}
+.progress i{display:block;height:100%;width:0;background:var(--web);transition:width .25s}
+
+fieldset{border:0;margin:0;padding:44px 20px 36px;border-bottom:2px solid var(--ink);display:grid;gap:20px;min-width:0}
+legend{display:contents}
+.fs-h{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 16px;align-items:baseline}
+.fs-h .n{font-family:var(--display);font-size:2.6rem;line-height:1;padding-top:4px;color:var(--paper);-webkit-text-stroke:1.5px var(--ink);paint-order:stroke;grid-row:span 2}
+.fs-h h2{font-size:clamp(1.6rem,4.4vw,2.2rem)}
+.fs-h p{color:var(--ink-muted);font-size:.95rem;max-width:60ch}
+
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 20px}
+.grid .full{grid-column:1/-1}
+@media (max-width:640px){.grid{grid-template-columns:1fr}}
+.f{display:flex;flex-direction:column;gap:6px;min-width:0}
+.f > label,.f > .q{font-weight:700;font-size:.92rem}
+.f small{color:var(--ink-muted);font-size:.82rem}
+.req{color:var(--web);font-weight:800}
+input[type=text],input[type=email],input[type=tel],input[type=url],input[type=date],textarea,select{
+  width:100%;font:inherit;font-size:1rem;color:var(--ink);background:var(--paper-2);border:0;border-bottom:2px solid var(--ink);padding:10px 12px;border-radius:0;color-scheme:light}
+textarea{min-height:96px;resize:vertical}
+input:focus,textarea:focus,select:focus{outline:none;border-bottom-color:var(--web);background:#fff}
+input::placeholder,textarea::placeholder{color:#8a8e96}
+
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips label{position:relative;cursor:pointer}
+.chips input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.chips span{display:inline-block;border:2px solid var(--ink);padding:7px 12px;font-weight:700;font-size:.85rem;background:var(--paper-2);transition:background .15s,transform .15s}
+.chips input:checked + span{background:var(--web);transform:rotate(-1.5deg)}
+.chips input:focus-visible + span{outline:2px solid var(--web);outline-offset:3px}
+
+.drop{border:2px dashed var(--ink);background:var(--paper-2);padding:18px;display:flex;flex-wrap:wrap;gap:12px 18px;align-items:center;justify-content:space-between;position:relative}
+.drop input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.drop .t{display:flex;flex-direction:column;gap:2px;min-width:0}
+.drop .t strong{font-family:var(--display);font-weight:400;font-size:1.3rem;text-transform:uppercase}
+.drop .t small{color:var(--ink-muted)}
+.drop .pick{background:var(--ink);color:var(--paper);font-weight:800;font-stretch:110%;text-transform:uppercase;font-size:.78rem;letter-spacing:.04em;padding:9px 14px}
+.drop.has{border-style:solid;border-color:var(--web)}
+.files{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.files li{font-size:.78rem;background:var(--ink);color:var(--paper);padding:3px 8px;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+.ext{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.ext a{display:flex;flex-direction:column;gap:2px;text-decoration:none;border:2px solid var(--ink);background:var(--paper-2);padding:12px 14px;transition:transform .15s,box-shadow .15s;min-width:0}
+.ext a:hover{transform:translate(-3px,-3px);box-shadow:3px 3px 0 var(--web)}
+.ext b{font-family:var(--display);font-weight:400;font-size:1.25rem;text-transform:uppercase}
+.ext span{font-size:.8rem;color:var(--ink-muted)}
+@media (max-width:520px){.ext{grid-template-columns:1fr}}
+.check{display:flex;gap:12px;align-items:flex-start;font-size:.92rem;cursor:pointer}
+.check input{width:20px;height:20px;accent-color:var(--web);flex:none;margin-top:2px}
+
+.send{padding:28px 20px;display:flex;justify-content:flex-end}
+.send p{color:var(--ink-muted);font-size:.9rem;max-width:48ch}
+.btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--body);font-stretch:110%;font-weight:800;text-transform:uppercase;letter-spacing:.04em;font-size:1rem;padding:16px 24px;border:2px solid var(--ink);background:var(--ink);color:var(--paper);cursor:pointer;transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translate(-3px,-3px);box-shadow:3px 3px 0 var(--web)}
+.msg{margin:0 20px 24px;border:3px solid var(--web);padding:16px 18px;font-weight:600}
+.msg strong{font-family:var(--display);font-weight:400;font-size:1.4rem;text-transform:uppercase;display:block;color:var(--web)}
+
+.pasos{border-top:1px solid var(--rule);background:var(--ink-2)}
+.pasos ol{list-style:none;margin:0;padding:0;display:flex;overflow-x:auto;scrollbar-width:none}
+.pasos ol::-webkit-scrollbar{display:none}
+.pasos li{flex:1 0 auto}
+.pasos a{display:flex;align-items:center;gap:8px;padding:10px 12px;text-decoration:none;color:var(--muted);font-weight:700;font-size:.85rem;white-space:nowrap;border-bottom:3px solid transparent}
+.pasos a b{font-family:var(--display);font-weight:400;font-size:1.15rem;color:var(--fg);width:1.6em;height:1.6em;display:grid;place-items:center;border:1.5px solid var(--rule)}
+.pasos a:hover{color:var(--fg)}
+.pasos a.on{color:var(--fg);border-bottom-color:var(--web)}
+.pasos a.on b{border-color:var(--web);color:var(--web)}
+.pasos a.ok b{background:var(--web);border-color:var(--web);color:var(--ink)}
+@media (max-width:560px){.pasos a{padding:9px 10px;font-size:.78rem}}
+fieldset{scroll-margin-top:120px}
+.totop{position:fixed;right:calc(16px + env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:6;width:48px;height:48px;display:grid;place-items:center;background:var(--ink);color:var(--fg);border:2px solid var(--fg);text-decoration:none;transition:transform .15s,box-shadow .15s}
+.totop:hover{transform:translate(-3px,-3px);box-shadow:3px 3px 0 var(--web)}
+.totop svg{width:22px;height:22px}
+.dudas{position:fixed;left:calc(16px + env(safe-area-inset-left,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:6;display:flex;align-items:center;gap:8px;height:48px;padding:0 16px;background:var(--wa);color:#04140a;border:2px solid var(--ink);font-weight:800;font-stretch:110%;font-size:.85rem;text-transform:uppercase;letter-spacing:.03em;text-decoration:none;transition:transform .15s,box-shadow .15s}
+.dudas:hover{transform:translate(-3px,-3px);box-shadow:3px 3px 0 var(--ink)}
+.dudas svg{width:20px;height:20px;flex:none}
+.sheet-wrap{padding-bottom:110px}
+@media (prefers-reduced-motion:reduce){.dudas,.totop{transition:none}.dudas:hover,.totop:hover{transform:none}}
+.estado-in{padding:40px 20px 48px;display:flex;flex-direction:column;align-items:flex-start;gap:14px}
+.estado-in h2{font-size:clamp(2.2rem,8vw,4rem)}
+.estado-in p{font-size:1.1rem;max-width:52ch}
+.estado-in .nota{color:var(--ink-muted);font-size:.92rem}
+#env-txt{word-break:break-word}
+.sello{display:inline-block;border:3px solid var(--web);color:var(--web);font-family:var(--display);font-size:1.6rem;text-transform:uppercase;padding:4px 14px;transform:rotate(-4deg)}
+.draft{background:var(--web);color:var(--ink);font-weight:700;font-size:.85rem;padding-block:10px}
+footer{padding-block:28px;color:var(--muted);font-size:.8125rem}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+footer .bars{display:flex;gap:3px}footer .bars b{width:22px;height:4px;display:block}
+@media (prefers-reduced-motion:reduce){.btn,.chips span,.progress i{transition:none}.btn:hover{transform:none}}
+</style>
+</head>
+<body>
+
+<div class="draft"><div class="wrap">Borrador de diseño: el formulario todavía no envía nada. Falta conectarlo a tu Google Drive.</div></div>
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#top" aria-label="Ir al inicio del formulario"><i><b style="background:var(--web)"></b><b style="background:var(--maps)"></b><b style="background:var(--pc)"></b><b style="background:var(--vinilo)"></b><b style="background:var(--remeras)"></b></i>Gabriel Asa</a>
+    <span class="back">Formulario para clientes</span>
+  </div>
+  <nav class="pasos" aria-label="Pasos del formulario">
+    <div class="wrap"><ol>
+      <li><a href="#paso1"><b>1</b>Vos</a></li>
+      <li><a href="#paso2"><b>2</b>Qué hacés</a></li>
+      <li><a href="#paso3"><b>3</b>Datos</a></li>
+      <li><a href="#paso4"><b>4</b>Objetivo</a></li>
+      <li><a href="#paso5"><b>5</b>Estilo</a></li>
+      <li><a href="#paso6"><b>6</b>Material</a></li>
+      <li><a href="#paso7"><b>7</b>Enviar</a></li>
+    </ol></div>
+  </nav>
+</header>
+<a class="dudas" href="https://wa.me/5492233040480?text=Hola%20Gabriel%2C%20estoy%20completando%20el%20formulario%20de%20Arranquemos%20y%20tengo%20una%20duda%3A%20" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2.1 1-2.4c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.3.5-.4.5c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.1 1 2.1 1.3 2.4 1.5.3.1.5.1.7-.1l1-1.2c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg>¿Dudas? Escribime</a>
+<a class="totop" href="#top" id="totop" aria-label="Volver arriba" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square"><path d="M12 19V5M5 12l7-7 7 7"/></svg></a>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-top"><span class="lbl">gabrielasa.com.ar/arranquemos</span><span class="lbl">Páginas web · Orden de trabajo</span></div>
+      <h1>Arranquemos<br><span class="sticker">tu página</span></h1>
+      <p class="lead">Completá esta hoja una sola vez y subí tus fotos, videos y logo. <strong>Con todo junto en un lugar, arranco a trabajar sin idas y vueltas.</strong> Te lleva unos 15 minutos. Si algo no lo tenés, dejalo en blanco y lo vemos juntos.</p>
+      <ol class="steps">
+        <li><strong>Contame quién sos</strong>Tu negocio y cómo contactarte.</li>
+        <li><strong>Qué querés lograr</strong>Para qué va a servir la página.</li>
+        <li><strong>Cómo te imaginás</strong>Colores, estilo y webs que te gustan.</li>
+        <li><strong>Subí tu material</strong>Logo, fotos y videos.</li>
+      </ol>
+    </div>
+  </section>
+
+  <div class="sheet-wrap">
+    <div class="wrap">
+      <form class="sheet" id="brief" novalidate>
+        <div class="sheet-top"><span class="lbl">Orden de trabajo · Página web</span><span class="lbl" id="pct">0% completo</span></div>
+        <div class="progress" aria-hidden="true"><i id="bar"></i></div>
+
+        <fieldset id="paso1">
+          <legend class="fs-h"><span class="n">1</span><h2>Vos y tu negocio</h2><p>Lo básico para saber con quién hablo y cómo te encuentro.</p></legend>
+          <div class="grid">
+            <div class="f"><label for="nombre">Tu nombre y apellido <span class="req">*</span></label><input id="nombre" name="nombre" type="text" required autocomplete="name"></div>
+            <div class="f"><label for="negocio">Nombre del negocio o proyecto <span class="req">*</span></label><input id="negocio" name="negocio" type="text" required placeholder="Ej: Pizzería Telmita"></div>
+            <div class="f"><label for="rubro">Rubro <span class="req">*</span></label><input id="rubro" name="rubro" type="text" required placeholder="Ej: pizzería, mantenimiento de piletas, banda"></div>
+            <div class="f"><label for="ciudad">Ciudad y barrio</label><input id="ciudad" name="ciudad" type="text" placeholder="Ej: Mar del Plata, Centro"></div>
+            <div class="f"><label for="wa">Tu WhatsApp <span class="req">*</span></label><input id="wa" name="whatsapp" type="tel" required autocomplete="tel" placeholder="223 000-0000"></div>
+            <div class="f"><label for="mail">Tu email</label><input id="mail" name="email" type="email" autocomplete="email"></div>
+            <div class="f full"><label for="redes">Tus redes</label><textarea id="redes" name="redes" placeholder="Instagram, Facebook, TikTok, YouTube… pegá los links o los usuarios" style="min-height:72px"></textarea></div>
+          </div>
+        </fieldset>
+
+        <fieldset id="paso2">
+          <legend class="fs-h"><span class="n">2</span><h2>Qué hacés</h2><p>Con esto escribo los textos de la página. Contalo como se lo contarías a un cliente.</p></legend>
+          <div class="grid">
+            <div class="f full"><label for="frase">Tu negocio en una frase <span class="req">*</span></label><input id="frase" name="frase" type="text" required placeholder="Ej: Mantenimiento de piletas todo el año en Villa Carlos Paz"></div>
+            <div class="f full"><label for="historia">Tu historia</label><small>Desde cuándo existe, cómo empezó, quiénes están detrás.</small><textarea id="historia" name="historia"></textarea></div>
+            <div class="f full"><label for="servicios">Servicios o productos que ofrecés <span class="req">*</span></label><small>Uno por línea. Si querés mostrar precios, ponelos al lado.</small><textarea id="servicios" name="servicios" placeholder="Limpieza semanal&#10;Puesta a punto de temporada&#10;Venta de químicos"></textarea></div>
+            <div class="f"><label for="diferencial">¿Por qué te eligen a vos?</label><textarea id="diferencial" name="diferencial" placeholder="Lo que te diferencia de la competencia"></textarea></div>
+            <div class="f"><label for="cliente">¿Quién es tu cliente?</label><textarea id="cliente" name="cliente" placeholder="Familias, comercios, turistas, jóvenes…"></textarea></div>
+            <div class="f full"><label for="competencia">¿Hay otros negocios que hagan lo mismo que vos?</label><small>Nombrá alguno de la zona o que conozcas. No hace falta el link. Me sirve para que tu página se vea distinta.</small><input id="competencia" name="competencia" type="text" placeholder="Ej: la pizzería de la esquina, Piletas Sur"></div>
+            <div class="f full"><span class="q">¿Cómo le hablás a tus clientes?</span><small>Elegí la que más se parezca a cómo atendés todos los días.</small>
+              <div class="chips">
+                <label><input type="radio" name="tono" value="De vos, cercano"><span>De vos, como a un vecino</span></label>
+                <label><input type="radio" name="tono" value="De usted, respetuoso"><span>De usted, más respetuoso</span></label>
+                <label><input type="radio" name="tono" value="Canchero, con humor"><span>Canchero, con humor</span></label>
+                <label><input type="radio" name="tono" value="Serio, profesional"><span>Serio y profesional</span></label>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset id="paso3">
+          <legend class="fs-h"><span class="n">3</span><h2>Datos que van en la página</h2><p>Lo que tus clientes van a ver para encontrarte o comprarte.</p></legend>
+          <div class="grid">
+            <div class="f"><label for="direccion">Dirección del local</label><input id="direccion" name="direccion" type="text" placeholder="Dejalo vacío si no tenés local"></div>
+            <div class="f"><label for="maps">Link de Google Maps</label><input id="maps" name="maps" type="url" placeholder="https://maps.app.goo.gl/…"></div>
+            <div class="f"><label for="horarios">Días y horarios</label><textarea id="horarios" name="horarios" style="min-height:72px" placeholder="Lun a vie 9 a 18 · Sáb 10 a 14"></textarea></div>
+            <div class="f"><label for="zona">Zona de trabajo o envíos</label><textarea id="zona" name="zona" style="min-height:72px" placeholder="Ej: solo Mar del Plata / envíos a todo el país"></textarea></div>
+            <div class="f"><label for="wapub">WhatsApp para la página</label><small>Si es otro distinto al tuyo.</small><input id="wapub" name="whatsapp_publico" type="tel"></div>
+            <div class="f"><span class="q">Medios de pago</span>
+              <div class="chips">
+                <label><input type="checkbox" name="pagos" value="Efectivo"><span>Efectivo</span></label>
+                <label><input type="checkbox" name="pagos" value="Transferencia"><span>Transferencia</span></label>
+                <label><input type="checkbox" name="pagos" value="Mercado Pago"><span>Mercado Pago</span></label>
+                <label><input type="checkbox" name="pagos" value="Tarjetas"><span>Tarjetas</span></label>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset id="paso4">
+          <legend class="fs-h"><span class="n">4</span><h2>Para qué es la página</h2><p>Marcá todo lo que corresponda.</p></legend>
+          <div class="f"><span class="q">¿Qué querés que haga la gente cuando entra? <span class="req">*</span></span>
+            <div class="chips">
+              <label><input type="checkbox" name="objetivo" value="Escribir por WhatsApp"><span>Que me escriba por WhatsApp</span></label>
+              <label><input type="checkbox" name="objetivo" value="Venir al local"><span>Que venga al local</span></label>
+              <label><input type="checkbox" name="objetivo" value="Pedir presupuesto"><span>Que pida presupuesto</span></label>
+              <label><input type="checkbox" name="objetivo" value="Ver mis trabajos"><span>Que vea mis trabajos</span></label>
+              <label><input type="checkbox" name="objetivo" value="Comprar o reservar"><span>Que compre o reserve</span></label>
+              <label><input type="checkbox" name="objetivo" value="Seguirme en redes"><span>Que me siga en redes</span></label>
+            </div>
+          </div>
+          <div class="f"><span class="q">Secciones que querés en la página</span>
+            <div class="chips">
+              <label><input type="checkbox" name="secciones" value="Quiénes somos"><span>Quiénes somos</span></label>
+              <label><input type="checkbox" name="secciones" value="Servicios / productos"><span>Servicios / productos</span></label>
+              <label><input type="checkbox" name="secciones" value="Precios"><span>Precios</span></label>
+              <label><input type="checkbox" name="secciones" value="Galería de fotos"><span>Galería de fotos</span></label>
+              <label><input type="checkbox" name="secciones" value="Videos"><span>Videos</span></label>
+              <label><input type="checkbox" name="secciones" value="Menú / carta"><span>Menú / carta</span></label>
+              <label><input type="checkbox" name="secciones" value="Opiniones de clientes"><span>Opiniones de clientes</span></label>
+              <label><input type="checkbox" name="secciones" value="Preguntas frecuentes"><span>Preguntas frecuentes</span></label>
+              <label><input type="checkbox" name="secciones" value="Mapa y contacto"><span>Mapa y contacto</span></label>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset id="paso5">
+          <legend class="fs-h"><span class="n">5</span><h2>Cómo te imaginás</h2><p>No hace falta que sepas de diseño. Con referencias me alcanza.</p></legend>
+          <div class="grid">
+            <div class="f"><span class="q">¿Tenés logo?</span>
+              <div class="chips">
+                <label><input type="radio" name="logo" value="Sí"><span>Sí</span></label>
+                <label><input type="radio" name="logo" value="No"><span>No</span></label>
+                <label><input type="radio" name="logo" value="Tengo pero no me gusta"><span>Tengo pero no me gusta</span></label>
+              </div>
+            </div>
+            <div class="f"><label for="colores">Colores de tu marca</label><input id="colores" name="colores" type="text" placeholder="Ej: azul y blanco, o los del logo"></div>
+            <div class="f full"><span class="q">Estilo que te gusta</span>
+              <div class="chips">
+                <label><input type="checkbox" name="estilo" value="Moderno"><span>Moderno</span></label>
+                <label><input type="checkbox" name="estilo" value="Clásico"><span>Clásico</span></label>
+                <label><input type="checkbox" name="estilo" value="De barrio / cercano"><span>De barrio / cercano</span></label>
+                <label><input type="checkbox" name="estilo" value="Elegante"><span>Elegante</span></label>
+                <label><input type="checkbox" name="estilo" value="Divertido / colorido"><span>Divertido / colorido</span></label>
+                <label><input type="checkbox" name="estilo" value="Rockero / urbano"><span>Rockero / urbano</span></label>
+                <label><input type="checkbox" name="estilo" value="Minimalista"><span>Minimalista</span></label>
+              </div>
+            </div>
+            <div class="f full"><label for="refs">Páginas que te gustan</label><small>Pegá 2 o 3 links (pueden ser de otro rubro) y contame qué te gusta de cada una.</small><textarea id="refs" name="referencias"></textarea></div>
+            <div class="f full"><label for="nogusta">Lo que NO querés</label><input id="nogusta" name="no_quiero" type="text" placeholder="Colores, estilos o cosas que no te gustan"></div>
+          </div>
+        </fieldset>
+
+        <fieldset id="paso6">
+          <legend class="fs-h"><span class="n">6</span><h2>Tu material</h2><p>Mientras más fotos reales, mejor queda la página. Mandalas en la mejor calidad que tengas.</p></legend>
+          <div class="drop" data-for="f-logo"><input id="f-logo" name="archivo_logo" type="file" accept="image/*,.pdf,.svg,.ai,.eps"><div class="t"><strong>Logo</strong><small>PNG, JPG, PDF o SVG</small><ul class="files"></ul></div><span class="pick">Elegir archivo</span></div>
+          <div class="drop" data-for="f-fotos"><input id="f-fotos" name="archivo_fotos" type="file" accept="image/*" multiple><div class="t"><strong>Fotos</strong><small>Local, productos, trabajos, equipo. Podés elegir varias.</small><ul class="files"></ul></div><span class="pick">Elegir fotos</span></div>
+          <div class="drop" data-for="f-videos"><input id="f-videos" name="archivo_videos" type="file" accept="video/*" multiple><div class="t"><strong>Videos</strong><small>Videos cortos. Si pesan mucho, usá el campo de abajo.</small><ul class="files"></ul></div><span class="pick">Elegir videos</span></div>
+          <div class="drop" data-for="f-otros"><input id="f-otros" name="archivo_otros" type="file" multiple><div class="t"><strong>Otros archivos</strong><small>Menú, lista de precios, folletos, textos que ya tengas.</small><ul class="files"></ul></div><span class="pick">Elegir archivos</span></div>
+          <div class="f"><label for="links">¿Videos muy pesados? Pegá el link</label><small>Subilos primero a Google Drive o WeTransfer (es gratis), copiá el link que te dan y pegalo acá.</small>
+            <div class="ext">
+              <a href="https://drive.google.com/drive/my-drive" target="_blank" rel="noopener"><b>Google Drive</b><span>Subí el video, tocá Compartir y copiá el link ↗</span></a>
+              <a href="https://wetransfer.com/" target="_blank" rel="noopener"><b>WeTransfer</b><span>Elegí "Obtener enlace" en vez de email ↗</span></a>
+            </div>
+            <input id="links" name="links_material" type="url" placeholder="https://drive.google.com/… o https://we.tl/…"></div>
+        </fieldset>
+
+        <fieldset id="paso7">
+          <legend class="fs-h"><span class="n">7</span><h2>Últimos detalles</h2><p>Para organizar los tiempos.</p></legend>
+          <div class="grid">
+            <div class="f"><span class="q">¿Tenés dominio propio? (tunegocio.com.ar)</span>
+              <div class="chips">
+                <label><input type="radio" name="dominio" value="Sí"><span>Sí</span></label>
+                <label><input type="radio" name="dominio" value="No"><span>No</span></label>
+                <label><input type="radio" name="dominio" value="No sé"><span>No sé qué es</span></label>
+              </div>
+            </div>
+            <div class="f"><label for="dom">Dominio que tenés o te gustaría</label><input id="dom" name="dominio_nombre" type="text" placeholder="minegocio.com.ar"></div>
+            <div class="f"><label for="fecha">¿Para cuándo la necesitás?</label><input id="fecha" name="fecha" type="date"></div>
+            <div class="f"><label for="extra">¿Algo más que quieras contarme?</label><textarea id="extra" name="comentarios" style="min-height:72px"></textarea></div>
+          </div>
+        </fieldset>
+
+        <div class="send">
+                    <button class="btn" type="submit">Enviar mi información →</button>
+        </div>
+        <div class="msg" id="msg" role="status" hidden></div>
+      </form>
+
+      <div class="sheet estado" id="enviando" hidden aria-live="polite">
+        <div class="sheet-top"><span class="lbl">Enviando</span><span class="lbl" id="env-pct">0%</span></div>
+        <div class="progress"><i id="env-bar"></i></div>
+        <div class="estado-in">
+          <h2>Subiendo tu información</h2>
+          <p id="env-txt">Preparando…</p>
+          <p class="nota">No cierres esta página hasta que termine. Si mandaste videos, puede tardar unos minutos.</p>
+        </div>
+      </div>
+
+      <div class="sheet estado" id="recibido" hidden>
+        <div class="sheet-top"><span class="lbl">Orden de trabajo · Recibida</span><span class="lbl">✓</span></div>
+        <div class="estado-in">
+          <span class="sello">Recibido</span>
+          <h2 id="ok-nombre">¡Listo!</h2>
+          <p>Me llegó todo. En las próximas 48 hs te escribo por WhatsApp para arrancar con tu página.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap"><span>Gabriel Asa · Páginas web, Google Maps, PC, vinilos y remeras · Mar del Plata</span><span class="bars"><b style="background:var(--web)"></b><b style="background:var(--maps)"></b><b style="background:var(--pc)"></b><b style="background:var(--vinilo)"></b><b style="background:var(--remeras)"></b></span></div>
+</footer>
+
+<script>
+(function(){
+  /* PEGÁ ACÁ el link de la aplicación web de Google (termina en /exec) */
+  var ENDPOINT='https://script.google.com/macros/s/AKfycbxypWBwt8iBll2__VD4FE3Xcn3TuRk_RfVk3XSGVaKS474TubfnthG2PNlKMoJ1V4om/exec';
+
+  var form=document.getElementById('brief');
+  var msg=document.getElementById('msg');
+  if(ENDPOINT)document.querySelector('.draft').hidden=true;
+  var req=Array.prototype.slice.call(form.querySelectorAll('[required]'));
+  var bar=document.getElementById('bar'),pct=document.getElementById('pct');
+  var track=['nombre','negocio','rubro','wa','frase','servicios','historia','redes','horarios','colores','refs'];
+  function progress(){
+    var done=0;
+    track.forEach(function(id){var el=document.getElementById(id);if(el&&el.value.trim())done++;});
+    if(form.querySelector('[name=objetivo]:checked'))done++;
+    if(form.querySelector('#f-fotos').files.length)done++;
+    var p=Math.round(done/(track.length+2)*100);
+    bar.style.width=p+'%';pct.textContent=p+'% completo';
+  }
+  form.addEventListener('input',progress);
+  form.addEventListener('change',progress);
+
+  document.querySelectorAll('.drop').forEach(function(d){
+    var inp=d.querySelector('input'),ul=d.querySelector('.files');
+    inp.addEventListener('change',function(){
+      ul.innerHTML='';
+      Array.prototype.forEach.call(inp.files,function(f){
+        var li=document.createElement('li');
+        li.textContent=f.name+' · '+(f.size/1048576).toFixed(1)+' MB';
+        ul.appendChild(li);
+      });
+      d.classList.toggle('has',inp.files.length>0);
+    });
+  });
+
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var missing=req.filter(function(el){return el.type==='checkbox'?!el.checked:!el.value.trim();});
+    if(!form.querySelector('[name=objetivo]:checked'))missing.push({labels:[{textContent:'Para qué es la página'}]});
+    if(missing.length){
+      msg.innerHTML='<strong>Faltan datos</strong>Completá los campos marcados con * para poder enviar.';
+      msg.hidden=false;
+      var first=missing[0];if(first.focus)first.focus();
+      return;
+    }
+    msg.hidden=true;
+    if(!ENDPOINT){
+      msg.innerHTML='<strong>Falta conectar</strong>Todavía no está pegado el link de Google en el formulario.';
+      msg.hidden=false;
+      return;
+    }
+    enviar();
+  });
+
+  /* ===== Envío a Google Drive ===== */
+  var PARTE=8*1024*1024; // 8 MB por parte (múltiplo de 256 KB, como pide Drive)
+  var MAX=500*1024*1024; // más de 500 MB por archivo: mejor por link
+  var enviando=false;
+  window.addEventListener('beforeunload',function(e){if(enviando){e.preventDefault();e.returnValue='';}});
+
+  function post(datos,intentos){
+    intentos=intentos||3;
+    return fetch(ENDPOINT,{method:'POST',body:JSON.stringify(datos)})
+      .then(function(r){return r.json();})
+      .then(function(r){if(!r.ok)throw new Error(r.error||'Error');return r;})
+      .catch(function(err){
+        if(intentos>1)return new Promise(function(ok){setTimeout(ok,1500);}).then(function(){return post(datos,intentos-1);});
+        throw err;
+      });
+  }
+  function aBase64(blob){
+    return new Promise(function(ok,mal){
+      var fr=new FileReader();
+      fr.onload=function(){ok(String(fr.result).split(',')[1]||'');};
+      fr.onerror=function(){mal(fr.error);};
+      fr.readAsDataURL(blob);
+    });
+  }
+  function respuestas(){
+    var out=[];
+    form.querySelectorAll('fieldset').forEach(function(fs){
+      var sec={titulo:fs.querySelector('h2').textContent,respuestas:[]};
+      fs.querySelectorAll('.f').forEach(function(f){
+        var q=f.querySelector(':scope > label, :scope > .q');
+        if(!q)return;
+        var vals=[];
+        f.querySelectorAll('input,textarea,select').forEach(function(el){
+          if(el.type==='file')return;
+          if(el.type==='checkbox'||el.type==='radio'){if(el.checked)vals.push(el.value);}
+          else if(el.value.trim())vals.push(el.value.trim());
+        });
+        sec.respuestas.push([q.textContent.replace('*','').trim(),vals.join(el2(vals))]);
+      });
+      out.push(sec);
+    });
+    return out;
+    function el2(v){return v.some(function(x){return x.indexOf('\n')>-1;})?'\n':', ';}
+  }
+  function archivos(){
+    var lista=[];
+    [['f-logo','Logo'],['f-fotos','Fotos'],['f-videos','Videos'],['f-otros','Otros']].forEach(function(p){
+      Array.prototype.forEach.call(document.getElementById(p[0]).files,function(f){
+        if(f.size>0&&f.size<=MAX)lista.push({file:f,sub:p[1]});
+      });
+    });
+    return lista;
+  }
+  function grandes(){
+    var g=[];
+    ['f-logo','f-fotos','f-videos','f-otros'].forEach(function(id){
+      Array.prototype.forEach.call(document.getElementById(id).files,function(f){if(f.size>MAX)g.push(f.name);});
+    });
+    return g;
+  }
+
+  var panel=document.getElementById('enviando'),pTxt=document.getElementById('env-txt'),pBar=document.getElementById('env-bar'),pPct=document.getElementById('env-pct');
+  function estado(t,p){pTxt.textContent=t;pBar.style.width=p+'%';pPct.textContent=Math.round(p)+'%';}
+
+  function enviar(){
+    var g=grandes();
+    if(g.length){
+      msg.innerHTML='<strong>Archivo muy pesado</strong>'+g.join(', ')+' pesa más de 500 MB. Subilo a Google Drive o WeTransfer y pegá el link en el paso 6.';
+      msg.hidden=false;return;
+    }
+    var lista=archivos();
+    var total=lista.reduce(function(s,a){return s+a.file.size;},0)||1;
+    var subido=0,carpeta=null;
+    var val=function(n){var el=form.querySelector('[name='+n+']');return el?el.value.trim():'';};
+    enviando=true;
+    form.hidden=true;panel.hidden=false;
+    window.scrollTo(0,document.querySelector('.sheet-wrap').offsetTop-80);
+    estado('Guardando tus respuestas…',2);
+
+    post({accion:'iniciar',negocio:val('negocio'),secciones:respuestas(),
+          archivos:lista.map(function(a){return a.sub+' / '+a.file.name;})})
+    .then(function(r){
+      carpeta=r.carpeta;
+      var cadena=Promise.resolve();
+      lista.forEach(function(a,i){
+        cadena=cadena.then(function(){
+          var f=a.file;
+          estado('Subiendo archivo '+(i+1)+' de '+lista.length+': '+f.name,5+subido/total*90);
+          return post({accion:'archivo_inicio',carpeta:carpeta,sub:a.sub,nombre:f.name,tipo:f.type,tamano:f.size})
+            .then(function(s){
+              var inicio=0,partes=Promise.resolve();
+              while(inicio<f.size){
+                (function(ini){
+                  partes=partes.then(function(){
+                    var trozo=f.slice(ini,Math.min(ini+PARTE,f.size));
+                    return aBase64(trozo).then(function(b64){
+                      return post({accion:'archivo_parte',sesion:s.sesion,inicio:ini,total:f.size,datos:b64});
+                    }).then(function(){
+                      subido+=trozo.size;
+                      estado('Subiendo archivo '+(i+1)+' de '+lista.length+': '+f.name,5+subido/total*90);
+                    });
+                  });
+                })(inicio);
+                inicio+=PARTE;
+              }
+              return partes;
+            });
+        });
+      });
+      return cadena;
+    })
+    .then(function(){
+      estado('Terminando…',97);
+      return post({accion:'terminar',carpeta:carpeta,negocio:val('negocio'),nombre:val('nombre'),whatsapp:val('whatsapp'),cantidad:lista.length});
+    })
+    .then(function(){
+      enviando=false;
+      try{localStorage.removeItem(KEY);}catch(e){}
+      panel.hidden=true;
+      var nom=val('nombre').split(' ')[0];
+      document.getElementById('ok-nombre').textContent=nom?('¡Listo, '+nom+'!'):'¡Listo!';
+      document.getElementById('recibido').hidden=false;
+      document.querySelector('.pasos').hidden=true;
+    })
+    .catch(function(){
+      enviando=false;
+      panel.hidden=true;form.hidden=false;
+      msg.innerHTML='<strong>No se pudo enviar</strong>Revisá tu conexión a internet y volvé a tocar "Enviar". Lo que escribiste sigue guardado. Si vuelve a fallar, escribime por WhatsApp.';
+      msg.hidden=false;
+      msg.scrollIntoView({block:'center'});
+    });
+  }
+  // Borrador automático: guarda lo escrito en este navegador por si se cierra o recarga la página
+  var KEY='arranquemos-borrador';
+  function guardar(){
+    var d={};
+    Array.prototype.forEach.call(form.elements,function(el){
+      if(!el.name||el.type==='file'||el.type==='submit')return;
+      if(el.type==='checkbox'||el.type==='radio'){if(el.checked)(d[el.name]=d[el.name]||[]).push(el.value);}
+      else d[el.name]=el.value;
+    });
+    try{localStorage.setItem(KEY,JSON.stringify(d));}catch(e){}
+  }
+  function restaurar(){
+    var d=null;
+    try{d=JSON.parse(localStorage.getItem(KEY)||'null');}catch(e){}
+    if(!d)return;
+    Array.prototype.forEach.call(form.elements,function(el){
+      if(!el.name||!(el.name in d)||el.type==='file')return;
+      if(el.type==='checkbox'||el.type==='radio')el.checked=d[el.name].indexOf(el.value)>-1;
+      else el.value=d[el.name];
+    });
+  }
+  restaurar();
+  form.addEventListener('input',guardar);
+  form.addEventListener('change',guardar);
+  progress();
+
+  // Barra de pasos: marca el paso actual y los que ya tienen algo cargado
+  var links={};
+  document.querySelectorAll('.pasos a').forEach(function(a){links[a.getAttribute('href').slice(1)]=a;});
+  var secs=Array.prototype.slice.call(document.querySelectorAll('fieldset[id^=paso]'));
+  function marcar(){
+    var y=window.innerHeight*0.35,cur=null;
+    secs.forEach(function(s){if(s.getBoundingClientRect().top<y)cur=s.id;});
+    secs.forEach(function(s){
+      var a=links[s.id];
+      a.classList.toggle('on',s.id===cur);
+      var lleno=Array.prototype.some.call(s.querySelectorAll('input,textarea'),function(el){
+        if(el.type==='checkbox'||el.type==='radio')return el.checked;
+        if(el.type==='file')return el.files.length>0;
+        return el.value.trim()!=='';
+      });
+      a.classList.toggle('ok',lleno);
+    });
+    if(cur&&links[cur].scrollIntoView&&links[cur].dataset.v!=='1'){
+      Object.keys(links).forEach(function(k){links[k].dataset.v='';});
+      links[cur].dataset.v='1';
+      var ol=links[cur].closest('ol');
+      ol.scrollTo({left:links[cur].offsetLeft-16,behavior:'smooth'});
+    }
+    document.getElementById('totop').hidden=window.scrollY<500;
+  }
+  window.addEventListener('scroll',marcar,{passive:true});
+  form.addEventListener('input',marcar);
+  form.addEventListener('change',marcar);
+  marcar();
+})();
+</script>
+</body>
+</html>
