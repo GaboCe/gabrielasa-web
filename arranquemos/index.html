@@ -385,7 +385,7 @@ footer .bars{display:flex;gap:3px}footer .bars b{width:22px;height:4px;display:b
       ul.innerHTML='';
       Array.prototype.forEach.call(inp.files,function(f){
         var li=document.createElement('li');
-        li.textContent=f.name+' · '+(f.size/1048576).toFixed(1)+' MB';
+        li.textContent=f.name+' · '+(f.size/1048576).toFixed(1)+' MB'+(/\.(exe|bat|cmd|com|scr|msi|msp|vbs|vbe|js|jse|wsf|wsh|ps1|psm1|jar|apk|app|dmg|pkg|deb|rpm|sh|reg|lnk|hta|cpl|dll|sys|iso|img|vhd|docm|xlsm|pptm|html|htm|svgz)$/i.test(f.name)?' · no se envía (tipo no permitido)':'');
         ul.appendChild(li);
       });
       d.classList.toggle('has',inp.files.length>0);
@@ -414,6 +414,7 @@ footer .bars{display:flex;gap:3px}footer .bars b{width:22px;height:4px;display:b
   /* ===== Envío a Google Drive ===== */
   var PARTE=8*1024*1024; // 8 MB por parte (múltiplo de 256 KB, como pide Drive)
   var MAX=500*1024*1024; // más de 500 MB por archivo: mejor por link
+  var BLOQ=/\.(exe|bat|cmd|com|scr|msi|msp|vbs|vbe|js|jse|wsf|wsh|ps1|psm1|jar|apk|app|dmg|pkg|deb|rpm|sh|reg|lnk|hta|cpl|dll|sys|iso|img|vhd|docm|xlsm|pptm|html|htm|svgz)$/i;
   var enviando=false;
   window.addEventListener('beforeunload',function(e){if(enviando){e.preventDefault();e.returnValue='';}});
 
@@ -459,7 +460,7 @@ footer .bars{display:flex;gap:3px}footer .bars b{width:22px;height:4px;display:b
     var lista=[];
     [['f-logo','Logo'],['f-fotos','Fotos'],['f-videos','Videos'],['f-otros','Otros']].forEach(function(p){
       Array.prototype.forEach.call(document.getElementById(p[0]).files,function(f){
-        if(f.size>0&&f.size<=MAX)lista.push({file:f,sub:p[1]});
+        if(f.size>0&&f.size<=MAX&&!BLOQ.test(f.name))lista.push({file:f,sub:p[1]});
       });
     });
     return lista;
