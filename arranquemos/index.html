@@ -279,6 +279,7 @@ footer .bars{display:flex;gap:3px}footer .bars b{width:22px;height:4px;display:b
               </div>
             </div>
             <div class="f"><label for="colores">Colores de tu marca</label><input id="colores" name="colores" type="text" placeholder="Ej: azul y blanco, o los del logo"></div>
+            <div class="f full"><label for="sentir">Contame en 3 palabras cómo querés que se sienta alguien al entrar a tu página.</label><small>Por ejemplo: confianza, calidez, energía, lujo, rapidez, alegría.</small><input id="sentir" name="sensacion" type="text"></div>
             <div class="f full"><span class="q">Estilo que te gusta</span>
               <div class="chips">
                 <label><input type="checkbox" name="estilo" value="Moderno"><span>Moderno</span></label>
@@ -290,7 +291,15 @@ footer .bars{display:flex;gap:3px}footer .bars b{width:22px;height:4px;display:b
                 <label><input type="checkbox" name="estilo" value="Minimalista"><span>Minimalista</span></label>
               </div>
             </div>
-            <div class="f full"><label for="refs">Páginas que te gustan</label><small>Pegá 2 o 3 links (pueden ser de otro rubro) y contame qué te gusta de cada una.</small><textarea id="refs" name="referencias"></textarea></div>
+            <div class="f full"><span class="q">¿Querés que la página tenga movimiento?</span>
+              <div class="chips">
+                <label><input type="radio" name="movimiento" value="Tranquila, sin distracciones"><span>Tranquila, sin distracciones</span></label>
+                <label><input type="radio" name="movimiento" value="Con algunos detalles que se mueven"><span>Con algunos detalles que se mueven</span></label>
+                <label><input type="radio" name="movimiento" value="Con mucha animación, que impacte"><span>Con mucha animación, que impacte</span></label>
+              </div>
+            </div>
+            <div class="f full"><label for="primero">¿Qué es lo primero que tiene que ver alguien al entrar?</label><small>Por ejemplo: mis trabajos, el precio, el local, el botón de WhatsApp.</small><input id="primero" name="lo_primero" type="text"></div>
+            <div class="f full"><label for="refs">Páginas que te gustan</label><small>Pegá 2 o 3 links y contame qué te gusta de cada una. Pueden ser de otro rubro, y también valen cuentas de Instagram, un local o un cartel que te guste.</small><textarea id="refs" name="referencias"></textarea></div>
             <div class="f full"><label for="nogusta">Lo que NO querés</label><input id="nogusta" name="no_quiero" type="text" placeholder="Colores, estilos o cosas que no te gustan"></div>
           </div>
         </fieldset>
@@ -367,13 +376,14 @@ footer .bars{display:flex;gap:3px}footer .bars b{width:22px;height:4px;display:b
   if(ENDPOINT)document.querySelector('.draft').hidden=true;
   var req=Array.prototype.slice.call(form.querySelectorAll('[required]'));
   var bar=document.getElementById('bar'),pct=document.getElementById('pct');
-  var track=['nombre','negocio','rubro','wa','frase','servicios','historia','redes','horarios','colores','refs'];
+  var track=['nombre','negocio','rubro','wa','frase','servicios','historia','redes','horarios','colores','sentir','primero','refs'];
   function progress(){
     var done=0;
     track.forEach(function(id){var el=document.getElementById(id);if(el&&el.value.trim())done++;});
     if(form.querySelector('[name=objetivo]:checked'))done++;
+    if(form.querySelector('[name=movimiento]:checked'))done++;
     if(form.querySelector('#f-fotos').files.length)done++;
-    var p=Math.round(done/(track.length+2)*100);
+    var p=Math.round(done/(track.length+3)*100);
     bar.style.width=p+'%';pct.textContent=p+'% completo';
   }
   form.addEventListener('input',progress);
