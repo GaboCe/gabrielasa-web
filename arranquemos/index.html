@@ -109,6 +109,11 @@ input::placeholder,textarea::placeholder{color:#8a8e96}
 .btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--body);font-stretch:110%;font-weight:800;text-transform:uppercase;letter-spacing:.04em;font-size:1rem;padding:16px 24px;border:2px solid var(--ink);background:var(--ink);color:var(--paper);cursor:pointer;transition:transform .15s,box-shadow .15s}
 .btn:hover{transform:translate(-3px,-3px);box-shadow:3px 3px 0 var(--web)}
 .msg{margin:0 20px 24px;border:3px solid var(--web);padding:16px 18px;font-weight:600}
+.msg-acc{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.msg-btn{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border:2px solid var(--ink);background:var(--ink);color:var(--paper);font:inherit;font-weight:800;font-size:.9rem;text-decoration:none;cursor:pointer}
+.msg-btn.alt{background:transparent;color:var(--ink)}
+.drop.warn{border-style:solid;border-color:#c2410c}
+.files li.perdido{background:#c2410c;white-space:normal}
 .msg strong{font-family:var(--display);font-weight:400;font-size:1.4rem;text-transform:uppercase;display:block;color:var(--web)}
 
 .pasos{border-top:1px solid var(--rule);background:var(--ink-2)}
@@ -346,7 +351,7 @@ footer .bars{display:flex;gap:3px}footer .bars b{width:22px;height:4px;display:b
         <div class="estado-in">
           <h2>Subiendo tu información</h2>
           <p id="env-txt">Preparando…</p>
-          <p class="nota">No cierres esta página hasta que termine. Si mandaste videos, puede tardar unos minutos.</p>
+          <p class="nota">No cierres esta página ni cambies de app hasta que termine. Si mandaste muchas fotos o videos, puede tardar unos minutos.</p>
         </div>
       </div>
 
@@ -399,6 +404,7 @@ footer .bars{display:flex;gap:3px}footer .bars b{width:22px;height:4px;display:b
         ul.appendChild(li);
       });
       d.classList.toggle('has',inp.files.length>0);
+      d.classList.remove('warn');
     });
   });
 
@@ -413,6 +419,13 @@ footer .bars{display:flex;gap:3px}footer .bars b{width:22px;height:4px;display:b
       return;
     }
     msg.hidden=true;
+    if(!sinArchivosOk&&!archivos().length&&!(document.getElementById('links').value||'').trim()){
+      msg.innerHTML='<strong>No subiste fotos ni archivos</strong>Las fotos de tu negocio son lo más importante para la página. Podés volver al paso 6 y elegirlas, o enviar igual y mandármelas después por WhatsApp.<span class="msg-acc"><a href="#paso6" class="msg-btn">Elegir fotos</a><button type="button" class="msg-btn alt" id="sin-arch">Enviar sin archivos</button></span>';
+      msg.hidden=false;
+      document.getElementById('sin-arch').addEventListener('click',function(){sinArchivosOk=true;msg.hidden=true;enviar();});
+      msg.scrollIntoView({block:'center'});
+      return;
+    }
     if(!ENDPOINT){
       msg.innerHTML='<strong>Falta conectar</strong>Todavía no está pegado el link de Google en el formulario.';
       msg.hidden=false;
@@ -421,22 +434,52 @@ footer .bars{display:flex;gap:3px}footer .bars b{width:22px;height:4px;display:b
     enviar();
   });
 
-  /* ===== Envío a Google Drive ===== */
-  var PARTE=8*1024*1024; // 8 MB por parte (múltiplo de 256 KB, como pide Drive)
+  /* ===== Envío a Google Drive =====
+     - Partes de 2 MB: aguantan mejor con datos móviles.
+     - Si se corta, al volver a tocar Enviar sigue en la misma carpeta y desde el byte donde quedó.
+     - Mantiene la pantalla encendida mientras sube y espera si el cliente cambia de app.
+     - Fotos pesadas se achican a 2560 px (de sobra para una web). Logo, videos y otros van originales. */
+  var PARTE=2*1024*1024; // múltiplo de 256 KB, como pide Drive
   var MAX=500*1024*1024; // más de 500 MB por archivo: mejor por link
   var BLOQ=/\.(exe|bat|cmd|com|scr|msi|msp|vbs|vbe|js|jse|wsf|wsh|ps1|psm1|jar|apk|app|dmg|pkg|deb|rpm|sh|reg|lnk|hta|cpl|dll|sys|iso|img|vhd|docm|xlsm|pptm|html|htm|svgz)$/i;
-  var enviando=false;
+  var KEY_ENVIO='arranquemos-envio';
+  var enviando=false,sinArchivosOk=false,envio=null;
   window.addEventListener('beforeunload',function(e){if(enviando){e.preventDefault();e.returnValue='';}});
 
+  function espera(ms){return new Promise(function(ok){setTimeout(ok,ms);});}
+  function visible(){
+    if(!document.hidden)return Promise.resolve();
+    return new Promise(function(ok){
+      function f(){if(!document.hidden){document.removeEventListener('visibilitychange',f);ok();}}
+      document.addEventListener('visibilitychange',f);
+    });
+  }
+  var wake=null;
+  function despierto(on){
+    try{
+      if(on&&!wake&&navigator.wakeLock)navigator.wakeLock.request('screen').then(function(w){wake=w;w.addEventListener('release',function(){wake=null;});}).catch(function(){});
+      if(!on&&wake){wake.release();wake=null;}
+    }catch(e){}
+  }
+  document.addEventListener('visibilitychange',function(){if(enviando&&!document.hidden)despierto(true);});
+
   function post(datos,intentos){
-    intentos=intentos||3;
-    return fetch(ENDPOINT,{method:'POST',body:JSON.stringify(datos)})
-      .then(function(r){return r.json();})
-      .then(function(r){if(!r.ok)throw new Error(r.error||'Error');return r;})
-      .catch(function(err){
-        if(intentos>1)return new Promise(function(ok){setTimeout(ok,1500);}).then(function(){return post(datos,intentos-1);});
-        throw err;
-      });
+    intentos=intentos||6;var n=0;
+    function uno(){
+      n++;
+      var ctrl=window.AbortController?new AbortController():null,t=null;
+      return visible().then(function(){
+        if(ctrl)t=setTimeout(function(){ctrl.abort();},120000);
+        return fetch(ENDPOINT,{method:'POST',body:JSON.stringify(datos),signal:ctrl?ctrl.signal:undefined});
+      }).then(function(r){return r.json();})
+        .then(function(r){clearTimeout(t);if(!r.ok)throw new Error(r.error||'Error');return r;})
+        .catch(function(err){
+          clearTimeout(t);
+          if(n<intentos)return espera(Math.min(1500*Math.pow(2,n-1),20000)).then(uno);
+          throw err;
+        });
+    }
+    return uno();
   }
   function aBase64(blob){
     return new Promise(function(ok,mal){
@@ -466,9 +509,10 @@ footer .bars{display:flex;gap:3px}footer .bars b{width:22px;height:4px;display:b
     return out;
     function el2(v){return v.some(function(x){return x.indexOf('\n')>-1;})?'\n':', ';}
   }
+  var INPUTS=[['f-logo','Logo'],['f-fotos','Fotos'],['f-videos','Videos'],['f-otros','Otros']];
   function archivos(){
     var lista=[];
-    [['f-logo','Logo'],['f-fotos','Fotos'],['f-videos','Videos'],['f-otros','Otros']].forEach(function(p){
+    INPUTS.forEach(function(p){
       Array.prototype.forEach.call(document.getElementById(p[0]).files,function(f){
         if(f.size>0&&f.size<=MAX&&!BLOQ.test(f.name))lista.push({file:f,sub:p[1]});
       });
@@ -477,14 +521,91 @@ footer .bars{display:flex;gap:3px}footer .bars b{width:22px;height:4px;display:b
   }
   function grandes(){
     var g=[];
-    ['f-logo','f-fotos','f-videos','f-otros'].forEach(function(id){
-      Array.prototype.forEach.call(document.getElementById(id).files,function(f){if(f.size>MAX)g.push(f.name);});
+    INPUTS.forEach(function(p){
+      Array.prototype.forEach.call(document.getElementById(p[0]).files,function(f){if(f.size>MAX)g.push(f.name);});
     });
     return g;
   }
+  function clave(a){return a.sub+'|'+a.file.name+'|'+a.file.size+'|'+a.file.lastModified;}
+
+  // Achica fotos pesadas (lado largo 2560 px, JPG 90%). Si algo falla, manda la original.
+  function achicar(f){
+    if(!/^image\/(jpe?g|heic|heif|webp)$/i.test(f.type)||f.size<3*1024*1024||!window.createImageBitmap)return Promise.resolve(f);
+    return createImageBitmap(f,{imageOrientation:'from-image'}).then(function(img){
+      var k=Math.min(1,2560/Math.max(img.width,img.height));
+      var c=document.createElement('canvas');
+      c.width=Math.round(img.width*k);c.height=Math.round(img.height*k);
+      c.getContext('2d').drawImage(img,0,0,c.width,c.height);
+      if(img.close)img.close();
+      return new Promise(function(ok){
+        c.toBlob(function(b){
+          if(!b||b.size>=f.size)return ok(f);
+          ok(new File([b],f.name.replace(/\.(heic|heif|webp)$/i,'.jpg'),{type:'image/jpeg',lastModified:f.lastModified}));
+        },'image/jpeg',0.9);
+      });
+    }).catch(function(){return f;});
+  }
 
   var panel=document.getElementById('enviando'),pTxt=document.getElementById('env-txt'),pBar=document.getElementById('env-bar'),pPct=document.getElementById('env-pct');
-  function estado(t,p){pTxt.textContent=t;pBar.style.width=p+'%';pPct.textContent=Math.round(p)+'%';}
+  function estado(t,p){if(t)pTxt.textContent=t;pBar.style.width=p+'%';pPct.textContent=Math.round(p)+'%';}
+  function avance(){
+    var n=envio.lista.length;if(!n)return 95;
+    var s=0;
+    envio.lista.forEach(function(a){
+      var k=clave(a);
+      if(envio.hechos[k])s+=1;
+      else if(envio.tam[k])s+=Math.min((envio.bytes[k]||0)/envio.tam[k],1);
+    });
+    return 5+s/n*90;
+  }
+  function guardarEnvio(){
+    try{localStorage.setItem(KEY_ENVIO,JSON.stringify({id:envio.id,hechos:envio.hechos,sesiones:envio.sesiones}));}catch(e){}
+  }
+
+  // Sube las partes de un archivo empezando en "desde". Si una parte falla, le pregunta a Drive hasta dónde llegó.
+  function partes(f,sesion,desde,k,trabas){
+    trabas=trabas||0;
+    var trozo=f.slice(desde,Math.min(desde+PARTE,f.size));
+    return aBase64(trozo).then(function(b64){
+      return post({accion:'archivo_parte',sesion:sesion,inicio:desde,total:f.size,datos:b64});
+    }).catch(function(){
+      return post({accion:'estado',sesion:sesion,total:f.size});
+    }).then(function(r){
+      var sig=r.listo?f.size:(typeof r.siguiente==='number'?r.siguiente:desde+trozo.size);
+      envio.bytes[k]=sig;
+      estado(null,avance());
+      if(r.listo||sig>=f.size)return;
+      if(sig<=desde){
+        if(trabas>=4)throw new Error('La subida no avanza');
+        return espera(3000).then(function(){return partes(f,sesion,sig,k,trabas+1);});
+      }
+      return partes(f,sesion,sig,k,0);
+    });
+  }
+  function subirArchivo(a,i,n){
+    var k=clave(a);
+    if(envio.hechos[k])return Promise.resolve();
+    var rotulo='Subiendo archivo '+(i+1)+' de '+n+': '+a.file.name;
+    estado(rotulo,avance());
+    return (a.sub==='Fotos'?achicar(a.file):Promise.resolve(a.file)).then(function(f){
+      envio.tam[k]=f.size;
+      var guardada=envio.sesiones[k];
+      var previa=(guardada&&guardada.tam===f.size)
+        ?post({accion:'estado',sesion:guardada.url,total:f.size},2).then(function(r){return r.listo?{listo:true}:{sesion:guardada.url,sig:r.siguiente||0};}).catch(function(){return null;})
+        :Promise.resolve(null);
+      return previa.then(function(p){
+        if(p&&p.listo)return;
+        if(p)return partes(f,p.sesion,p.sig,k);
+        return post({accion:'archivo_inicio',carpeta:envio.carpeta,sub:a.sub,nombre:f.name,tipo:f.type,tamano:f.size}).then(function(s){
+          envio.sesiones[k]={url:s.sesion,tam:f.size};guardarEnvio();
+          return partes(f,s.sesion,0,k);
+        });
+      }).then(function(){
+        envio.hechos[k]=true;envio.bytes[k]=f.size;guardarEnvio();
+        estado(rotulo,avance());
+      });
+    });
+  }
 
   function enviar(){
     var g=grandes();
@@ -492,54 +613,34 @@ footer .bars{display:flex;gap:3px}footer .bars b{width:22px;height:4px;display:b
       msg.innerHTML='<strong>Archivo muy pesado</strong>'+g.join(', ')+' pesa más de 500 MB. Subilo a Google Drive o WeTransfer y pegá el link en el paso 6.';
       msg.hidden=false;return;
     }
-    var lista=archivos();
-    var total=lista.reduce(function(s,a){return s+a.file.size;},0)||1;
-    var subido=0,carpeta=null;
-    var val=function(n){var el=form.querySelector('[name='+n+']');return el?el.value.trim():'';};
-    enviando=true;
+    var lista=archivos(),n=lista.length;
+    if(!envio){
+      var prev=null;try{prev=JSON.parse(localStorage.getItem(KEY_ENVIO)||'null');}catch(e){}
+      envio={id:prev&&prev.id||(Date.now().toString(36)+Math.random().toString(36).slice(2,10)),hechos:prev&&prev.hechos||{},sesiones:prev&&prev.sesiones||{},bytes:{},tam:{},carpeta:null};
+      guardarEnvio();
+    }
+    envio.lista=lista;
+    var val=function(nm){var el=form.querySelector('[name='+nm+']');return el?el.value.trim():'';};
+    enviando=true;despierto(true);
     form.hidden=true;panel.hidden=false;
     window.scrollTo(0,document.querySelector('.sheet-wrap').offsetTop-80);
     estado('Guardando tus respuestas…',2);
 
-    post({accion:'iniciar',negocio:val('negocio'),secciones:respuestas(),
+    post({accion:'iniciar',envio:envio.id,nombre:val('nombre'),negocio:val('negocio'),whatsapp:val('whatsapp'),secciones:respuestas(),
           archivos:lista.map(function(a){return a.sub+' / '+a.file.name;})})
     .then(function(r){
-      carpeta=r.carpeta;
+      envio.carpeta=r.carpeta;
       var cadena=Promise.resolve();
-      lista.forEach(function(a,i){
-        cadena=cadena.then(function(){
-          var f=a.file;
-          estado('Subiendo archivo '+(i+1)+' de '+lista.length+': '+f.name,5+subido/total*90);
-          return post({accion:'archivo_inicio',carpeta:carpeta,sub:a.sub,nombre:f.name,tipo:f.type,tamano:f.size})
-            .then(function(s){
-              var inicio=0,partes=Promise.resolve();
-              while(inicio<f.size){
-                (function(ini){
-                  partes=partes.then(function(){
-                    var trozo=f.slice(ini,Math.min(ini+PARTE,f.size));
-                    return aBase64(trozo).then(function(b64){
-                      return post({accion:'archivo_parte',sesion:s.sesion,inicio:ini,total:f.size,datos:b64});
-                    }).then(function(){
-                      subido+=trozo.size;
-                      estado('Subiendo archivo '+(i+1)+' de '+lista.length+': '+f.name,5+subido/total*90);
-                    });
-                  });
-                })(inicio);
-                inicio+=PARTE;
-              }
-              return partes;
-            });
-        });
-      });
+      lista.forEach(function(a,i){cadena=cadena.then(function(){return subirArchivo(a,i,n);});});
       return cadena;
     })
     .then(function(){
       estado('Terminando…',97);
-      return post({accion:'terminar',carpeta:carpeta,negocio:val('negocio'),nombre:val('nombre'),whatsapp:val('whatsapp'),cantidad:lista.length});
+      return post({accion:'terminar',carpeta:envio.carpeta,negocio:val('negocio'),nombre:val('nombre'),whatsapp:val('whatsapp'),cantidad:n});
     })
     .then(function(){
-      enviando=false;
-      try{localStorage.removeItem(KEY);}catch(e){}
+      enviando=false;despierto(false);envio=null;
+      try{localStorage.removeItem(KEY);localStorage.removeItem(KEY_ENVIO);}catch(e){}
       panel.hidden=true;
       var nom=val('nombre').split(' ')[0];
       document.getElementById('ok-nombre').textContent=nom?('¡Listo, '+nom+'!'):'¡Listo!';
@@ -547,9 +648,12 @@ footer .bars{display:flex;gap:3px}footer .bars b{width:22px;height:4px;display:b
       document.querySelector('.pasos').hidden=true;
     })
     .catch(function(){
-      enviando=false;
+      enviando=false;despierto(false);
       panel.hidden=true;form.hidden=false;
-      msg.innerHTML='<strong>No se pudo enviar</strong>Revisá tu conexión a internet y volvé a tocar "Enviar". Lo que escribiste sigue guardado. Si vuelve a fallar, escribime por WhatsApp.';
+      var hechos=lista.filter(function(a){return envio.hechos[clave(a)];}).length;
+      msg.innerHTML=envio.carpeta
+        ?'<strong>Se cortó la subida</strong>Tus respuestas ya me llegaron'+(n?' y se subieron '+hechos+' de '+n+' archivos':'')+'. Volvé a tocar "Enviar mi información": sigue desde donde quedó, sin repetir lo que ya subió. Mientras sube, dejá esta pantalla abierta.'
+        :'<strong>No se pudo enviar</strong>Revisá tu conexión a internet y volvé a tocar "Enviar mi información". Lo que escribiste sigue guardado. Si vuelve a fallar, escribime por WhatsApp.';
       msg.hidden=false;
       msg.scrollIntoView({block:'center'});
     });
@@ -563,6 +667,8 @@ footer .bars{display:flex;gap:3px}footer .bars b{width:22px;height:4px;display:b
       if(el.type==='checkbox'||el.type==='radio'){if(el.checked)(d[el.name]=d[el.name]||[]).push(el.value);}
       else d[el.name]=el.value;
     });
+    d._archivos={};
+    INPUTS.forEach(function(p){d._archivos[p[0]]=document.getElementById(p[0]).files.length;});
     try{localStorage.setItem(KEY,JSON.stringify(d));}catch(e){}
   }
   function restaurar(){
@@ -573,6 +679,17 @@ footer .bars{display:flex;gap:3px}footer .bars b{width:22px;height:4px;display:b
       if(!el.name||!(el.name in d)||el.type==='file')return;
       if(el.type==='checkbox'||el.type==='radio')el.checked=d[el.name].indexOf(el.value)>-1;
       else el.value=d[el.name];
+    });
+    // Si había elegido archivos y la página se recargó, se perdieron: avisamos para que los vuelva a elegir
+    var perdidos=d._archivos||{};
+    INPUTS.forEach(function(p){
+      var c=perdidos[p[0]]||0,inp=document.getElementById(p[0]);
+      if(c&&!inp.files.length){
+        var drop=inp.closest('.drop'),ul=drop.querySelector('.files');
+        var li=document.createElement('li');li.className='perdido';
+        li.textContent=c===1?'La página se recargó y se borró el archivo que habías elegido. Volvé a elegirlo.':'La página se recargó y se borraron los '+c+' archivos que habías elegido. Volvé a elegirlos.';
+        ul.appendChild(li);drop.classList.add('warn');
+      }
     });
   }
   restaurar();
