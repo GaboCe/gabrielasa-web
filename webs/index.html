@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Webs que hice · Gabriel Asa</title>
+<meta name="description" content="Portfolio de páginas web hechas por Gabriel Asa: cotizadores, guías, galerías, landings y webs de servicios. Pedí la tuya por WhatsApp.">
+<meta property="og:title" content="Webs que hice · Gabriel Asa">
+<meta property="og:description" content="Mirá las páginas web que hice, en la compu y en el celular.">
+<meta property="og:image" content="https://gabrielasa.com.ar/img/webs/marderock-pc.jpg">
+<meta name="theme-color" content="#07080a">
+<link rel="canonical" href="https://gabrielasa.com.ar/webs/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wdth,wght@62..125,400..800&family=Caveat:wght@700&display=swap">
+<style>
+/* Layout: la misma "noche de taller" de la página de servicios, convertida en vitrina. Cada web es una sala propia: pantalla de compu con el celular apoyado adelante, número grande y su color de acento. Las piezas aparecen suave al bajar. */
+:root{
+  --bg:#07080a; --panel:#101216; --line:rgba(255,255,255,.09);
+  --fg:#f3f2ee; --muted:#a2a6ae;
+  --web:#ff4d8d; --maps:#ffc21a; --remeras:#ff7a1a; --vinilo:#19b5fe; --pc:#2bd67b; --wa:#25d366;
+  --display:"Anton","Impact","Arial Narrow",sans-serif;
+  --body:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --script:"Caveat","Segoe Script",cursive;
+  --ease:cubic-bezier(.2,.7,.2,1);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--body);font-size:1rem;line-height:1.55;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+a:focus-visible{outline:2px solid var(--fg);outline-offset:3px;border-radius:8px}
+h1,h2,h3{font-family:var(--display);font-weight:400;text-transform:uppercase;line-height:.92;margin:0;text-wrap:balance}
+p{margin:0}
+img{display:block;max-width:100%}
+.wrap{max-width:1200px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+
+/* ---- Fondo: las mismas luces de la página de servicios ---- */
+.stage{position:relative;overflow:hidden}
+.aurora{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;filter:saturate(1.1)}
+.aurora i{position:absolute;width:44vmax;height:44vmax;border-radius:50%;filter:blur(90px);opacity:.24;mix-blend-mode:screen;will-change:transform}
+.aurora i:nth-child(1){background:var(--web);left:-10%;top:0;animation:d1 26s ease-in-out infinite alternate}
+.aurora i:nth-child(2){background:var(--maps);left:60%;top:-8%;opacity:.14;animation:d2 30s ease-in-out infinite alternate}
+.aurora i:nth-child(3){background:var(--vinilo);left:30%;top:30%;opacity:.16;animation:d3 28s ease-in-out infinite alternate}
+@keyframes d1{to{transform:translate(18vw,10vh) scale(1.15)}}
+@keyframes d2{to{transform:translate(-14vw,16vh) scale(.9)}}
+@keyframes d3{to{transform:translate(16vw,-14vh) scale(.95)}}
+.grain{position:absolute;inset:0;z-index:0;pointer-events:none;background:
+  linear-gradient(180deg,rgba(7,8,10,0) 40%,var(--bg) 100%),
+  repeating-linear-gradient(90deg,rgba(255,255,255,.025) 0 1px,transparent 1px 120px)}
+
+/* ---- Menú cápsula ---- */
+.top{position:relative;z-index:3;padding-top:22px}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{font-family:var(--display);font-size:1.4rem;text-transform:uppercase;display:flex;align-items:center;gap:10px}
+.brand i{display:flex;gap:3px}.brand b{width:5px;height:18px;display:block;border-radius:2px}
+.pill{display:flex;gap:4px;padding:5px;border:1px solid var(--line);border-radius:999px;background:rgba(16,18,22,.55);backdrop-filter:blur(14px)}
+.pill a{padding:8px 16px;border-radius:999px;font-weight:600;font-size:.88rem;color:var(--muted)}
+.pill a.on{background:var(--fg);color:var(--bg)}
+.pill a:not(.on):hover{color:var(--fg)}
+@media (max-width:640px){.bar{flex-wrap:wrap;row-gap:12px}.pill{order:3;width:100%;justify-content:space-around}.pill a{padding:8px 10px;font-size:.82rem}}
+
+/* ---- Inicio ---- */
+.hero{position:relative;z-index:2;padding-block:72px 40px}
+.eyebrow{display:flex;align-items:center;gap:12px;font-stretch:125%;font-weight:700;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.eyebrow::after{content:"";width:64px;height:1px;background:var(--line)}
+.hero h1{font-size:clamp(3.4rem,10vw,8.6rem);margin-top:18px}
+.scr{font-family:var(--script);text-transform:none;font-weight:700;font-size:1.05em;line-height:.8;display:inline-block;transform:rotate(-4deg) translateY(.06em);background:linear-gradient(90deg,var(--web),var(--remeras) 45%,var(--maps));-webkit-background-clip:text;background-clip:text;color:transparent;padding-right:.08em}
+.hero-row{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:28px;margin-top:26px}
+.lead{color:var(--muted);font-size:1.12rem;max-width:44ch}
+.lead strong{color:var(--fg);font-weight:600}
+.index{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px;max-width:560px}
+.index a{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.03);font-weight:600;font-size:.86rem;color:var(--muted);transition:color .2s,border-color .2s}
+.index a::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--c);box-shadow:0 0 10px var(--c)}
+.index a:hover{color:var(--fg);border-color:color-mix(in srgb,var(--c) 60%,transparent)}
+
+/* ---- Cada web ---- */
+.cases{position:relative;z-index:2;padding-block:30px 40px}
+.case{position:relative;display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:56px;align-items:center;padding-block:70px;border-top:1px solid var(--line);scroll-margin-top:20px}
+.case:nth-child(even){grid-template-columns:minmax(0,1fr) minmax(0,1.35fr)}
+.case:nth-child(even) .show{order:2}
+@media (max-width:900px){.case,.case:nth-child(even){grid-template-columns:1fr;gap:34px;padding-block:54px}.case:nth-child(even) .show{order:0}}
+
+/* Vitrina: compu + celu */
+.show{position:relative;padding:0 9% 9% 0}
+.case:nth-child(even) .show{padding:0 0 9% 9%}
+.show::before{content:"";position:absolute;inset:8% 4% 0;border-radius:50%;background:radial-gradient(closest-side,color-mix(in srgb,var(--c) 30%,transparent),transparent);filter:blur(40px);z-index:-1;opacity:.8}
+.desk{position:relative;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.12);background:#0c0d10;box-shadow:0 40px 90px -30px rgba(0,0,0,.85),0 0 0 1px rgba(0,0,0,.4)}
+.chrome{display:flex;align-items:center;gap:12px;height:34px;padding:0 12px;background:#16181d;border-bottom:1px solid rgba(255,255,255,.07)}
+.chrome i{display:flex;gap:6px}.chrome i b{width:9px;height:9px;border-radius:50%;background:#2c2f36;display:block}
+.chrome span{flex:1;max-width:320px;margin:0 auto;height:20px;border-radius:6px;background:#0c0d10;color:var(--muted);font-size:.7rem;display:flex;align-items:center;justify-content:center;gap:6px;white-space:nowrap;overflow:hidden}
+.chrome span svg{width:10px;height:10px;flex:none}
+.screen{aspect-ratio:16/10;overflow:hidden;background:#0c0d10}
+.screen img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform 1.2s var(--ease)}
+.phone{position:absolute;right:0;bottom:0;width:27%;min-width:110px;padding:6px;border-radius:30px;background:#15171c;border:1px solid rgba(255,255,255,.16);box-shadow:0 30px 60px -16px rgba(0,0,0,.9),inset 0 0 0 1px rgba(0,0,0,.6)}
+.case:nth-child(even) .phone{right:auto;left:0}
+.phone .screen{aspect-ratio:390/664;border-radius:24px}
+@media (max-width:640px){.phone{width:32%}}
+.case:hover .desk .screen img{transform:scale(1.03)}
+.case:hover .phone{transform:translateY(-8px)}
+.phone{transition:transform .6s var(--ease)}
+
+/* Texto */
+.info{display:flex;flex-direction:column;gap:14px;min-width:0}
+.num{font-family:var(--display);font-size:clamp(3.4rem,7vw,5.4rem);line-height:.8;color:transparent;-webkit-text-stroke:1px color-mix(in srgb,var(--c) 70%,transparent)}
+.tag{align-self:flex-start;background:var(--c);color:#0a0b0d;font-stretch:125%;font-weight:800;font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;padding:4px 9px;border-radius:6px}
+.info h2{font-size:clamp(2.4rem,5vw,3.9rem)}
+.info p{color:#c9ccd2;font-size:1.08rem;max-width:40ch}
+.dom{color:var(--muted);font-size:.9rem;font-weight:600;display:flex;align-items:center;gap:8px}
+.dom::before{content:"";width:18px;height:1px;background:var(--c)}
+.visit{align-self:flex-start;margin-top:8px;display:inline-flex;align-items:center;gap:10px;padding:13px 22px;border-radius:999px;border:1px solid var(--c);color:var(--fg);font-weight:800;font-size:.95rem;background:color-mix(in srgb,var(--c) 10%,transparent);transition:background .25s,transform .25s,box-shadow .25s}
+.visit svg{width:16px;height:16px;transition:transform .25s}
+.visit:hover{background:var(--c);color:#0a0b0d;transform:translateY(-2px);box-shadow:0 14px 34px -10px color-mix(in srgb,var(--c) 70%,transparent)}
+.visit:hover svg{transform:translate(2px,-2px)}
+
+/* ---- Aparición suave al bajar ---- */
+.js .rv{opacity:0;transform:translateY(28px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.js .rv.in{opacity:1;transform:none}
+.js .case .phone.rv{transform:translateY(50px)}
+.js .case .phone.rv.in{transform:none;transition-delay:.18s}
+.js .info.rv{transition-delay:.1s}
+
+/* ---- Cierre ---- */
+.end{position:relative;z-index:2;padding-block:30px 130px}
+.ct{position:relative;overflow:hidden;text-align:center;padding:64px 28px;border-radius:30px;border:1px solid var(--line);background:linear-gradient(135deg,rgba(255,255,255,.05),rgba(255,255,255,.01))}
+.ct::before{content:"";position:absolute;left:50%;top:-40%;width:70%;aspect-ratio:1;transform:translateX(-50%);border-radius:50%;background:radial-gradient(closest-side,rgba(255,77,141,.22),transparent);pointer-events:none}
+.ct .eyebrow{justify-content:center}.ct .eyebrow::before{content:"";width:64px;height:1px;background:var(--line)}
+.ct h2{position:relative;font-size:clamp(2.6rem,7vw,5.2rem);margin:16px 0 18px}
+.ct p{position:relative;color:var(--muted);font-size:1.08rem;max-width:46ch;margin:0 auto}
+.acts{position:relative;display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:32px}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:16px 26px;border-radius:999px;font-weight:800;font-size:1.02rem;transition:transform .2s,box-shadow .2s,border-color .2s}
+.btn svg{width:20px;height:20px}
+.btn-wa{background:var(--wa);color:#04140a}
+.btn-wa:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(37,211,102,.32)}
+.btn-ghost{border:1px solid rgba(255,255,255,.22);color:var(--fg)}
+.btn-ghost:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.5)}
+.foot{position:relative;z-index:2;border-top:1px solid var(--line);padding-block:22px 40px;color:var(--muted);font-size:.85rem;display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
+.foot a:hover{color:var(--fg)}
+
+.fab{position:fixed;z-index:20;right:calc(18px + env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));width:60px;height:60px;border-radius:50%;background:var(--wa);color:#fff;display:grid;place-items:center;box-shadow:0 10px 30px rgba(0,0,0,.45);animation:pulse 2.8s ease-out infinite;transition:transform .2s}
+.fab svg{width:32px;height:32px}
+.fab:hover{transform:scale(1.06)}
+@keyframes pulse{0%{box-shadow:0 10px 30px rgba(0,0,0,.45),0 0 0 0 rgba(37,211,102,.45)}70%{box-shadow:0 10px 30px rgba(0,0,0,.45),0 0 0 16px rgba(37,211,102,0)}100%{box-shadow:0 10px 30px rgba(0,0,0,.45),0 0 0 0 rgba(37,211,102,0)}}
+
+@media (prefers-reduced-motion:reduce){
+  .aurora i,.fab{animation:none}
+  .js .rv,.js .case .phone.rv{opacity:1;transform:none;transition:none}
+  .screen img,.phone,.visit,.visit svg,.btn{transition:none}
+}
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="top">
+    <div class="wrap bar">
+      <a class="brand" href="/"><i aria-hidden="true"><b style="background:var(--web)"></b><b style="background:var(--maps)"></b><b style="background:var(--remeras)"></b><b style="background:var(--vinilo)"></b><b style="background:var(--pc)"></b></i>Gabriel Asa</a>
+      <nav class="pill" aria-label="Secciones"><a href="/">Servicios</a><a class="on" href="/webs/" aria-current="page">Webs</a><a href="#pedir">Pedir la tuya</a></nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="wrap">
+      <p class="eyebrow">Portfolio · Páginas web</p>
+      <h1>Webs que <span class="scr">hice.</span></h1>
+      <div class="hero-row">
+        <p class="lead">Cada una con <strong>su propia identidad</strong>, pensada para lo que tiene que hacer. Entrá, recorrelas y mirá cómo se ven en la compu y en el celular.</p>
+        <ul class="index" aria-label="Ir a una web">
+          <li><a href="#aires" style="--c:var(--remeras)">aires</a></li>
+          <li><a href="#marderock" style="--c:var(--web)">Mar de Rock</a></li>
+          <li><a href="#fotos" style="--c:var(--pc)">Fotografía</a></li>
+          <li><a href="#canciones" style="--c:var(--maps)">Sala de Escucha</a></li>
+          <li><a href="#aleperalta" style="--c:var(--vinilo)">Ale Peralta</a></li>
+          <li><a href="#lm" style="--c:var(--maps)">L&amp;M</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <main class="cases wrap">
+    <article class="case" id="aires" style="--c:var(--remeras)">
+      <div class="show">
+        <div class="desk rv"><div class="chrome" aria-hidden="true"><i><b></b><b></b><b></b></i><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>aires.gabrielasa.com.ar</span></div><div class="screen"><img src="/img/webs/aires-pc.jpg" alt="Web de aires vista en la compu" width="1440" height="900" loading="lazy"></div></div>
+        <div class="phone rv"><div class="screen"><img src="/img/webs/aires-cel.jpg" alt="Web de aires vista en el celular" width="390" height="664" loading="lazy"></div></div>
+      </div>
+      <div class="info rv">
+        <span class="num" aria-hidden="true">01</span>
+        <span class="tag">Cotizador</span>
+        <h2>aires</h2>
+        <p>Cotizador de remeras con remera 3D: elegís color y talles, ves el precio y hacés el pedido por WhatsApp.</p>
+        <span class="dom">aires.gabrielasa.com.ar</span>
+        <a class="visit" href="https://aires.gabrielasa.com.ar/" target="_blank" rel="noopener">Visitar web <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+      </div>
+    </article>
+
+    <article class="case" id="marderock" style="--c:var(--web)">
+      <div class="show">
+        <div class="desk rv"><div class="chrome" aria-hidden="true"><i><b></b><b></b><b></b></i><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>marderock.com.ar</span></div><div class="screen"><img src="/img/webs/marderock-pc.jpg" alt="Web de Mar de Rock vista en la compu" width="1440" height="900" loading="lazy"></div></div>
+        <div class="phone rv"><div class="screen"><img src="/img/webs/marderock-cel.jpg" alt="Web de Mar de Rock vista en el celular" width="390" height="664" loading="lazy"></div></div>
+      </div>
+      <div class="info rv">
+        <span class="num" aria-hidden="true">02</span>
+        <span class="tag">Guía</span>
+        <h2>Mar de Rock</h2>
+        <p>Guía de bandas, bares y salas de Mar del Plata, con la agenda de shows de la semana.</p>
+        <span class="dom">marderock.com.ar</span>
+        <a class="visit" href="https://marderock.com.ar/" target="_blank" rel="noopener">Visitar web <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+      </div>
+    </article>
+
+    <article class="case" id="fotos" style="--c:var(--pc)">
+      <div class="show">
+        <div class="desk rv"><div class="chrome" aria-hidden="true"><i><b></b><b></b><b></b></i><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>fotos.gabrielasa.com.ar</span></div><div class="screen"><img src="/img/webs/fotos-pc.jpg" alt="Web de fotografía de shows vista en la compu" width="1440" height="900" loading="lazy"></div></div>
+        <div class="phone rv"><div class="screen"><img src="/img/webs/fotos-cel.jpg" alt="Web de fotografía de shows vista en el celular" width="390" height="664" loading="lazy"></div></div>
+      </div>
+      <div class="info rv">
+        <span class="num" aria-hidden="true">03</span>
+        <span class="tag">Galería</span>
+        <h2>Fotografía de shows</h2>
+        <p>Fotos de shows en vivo en Mar del Plata: buscás tu show por artista o lugar, te bajás las fotos gratis y podés pedirlas impresas.</p>
+        <span class="dom">fotos.gabrielasa.com.ar</span>
+        <a class="visit" href="https://fotos.gabrielasa.com.ar/" target="_blank" rel="noopener">Visitar web <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+      </div>
+    </article>
+
+    <article class="case" id="canciones" style="--c:var(--maps)">
+      <div class="show">
+        <div class="desk rv"><div class="chrome" aria-hidden="true"><i><b></b><b></b><b></b></i><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>canciones.gabrielasa.com.ar</span></div><div class="screen"><img src="/img/webs/canciones-pc.jpg" alt="Sala de Escucha vista en la compu" width="1440" height="900" loading="lazy"></div></div>
+        <div class="phone rv"><div class="screen"><img src="/img/webs/canciones-cel.jpg" alt="Sala de Escucha vista en el celular" width="390" height="664" loading="lazy"></div></div>
+      </div>
+      <div class="info rv">
+        <span class="num" aria-hidden="true">04</span>
+        <span class="tag">Música</span>
+        <h2>Sala de Escucha</h2>
+        <p>Plataforma para escuchar canciones, armar tu propia lista y seguir la letra mientras suena.</p>
+        <span class="dom">canciones.gabrielasa.com.ar</span>
+        <a class="visit" href="https://canciones.gabrielasa.com.ar/" target="_blank" rel="noopener">Visitar web <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+      </div>
+    </article>
+
+    <article class="case" id="aleperalta" style="--c:var(--vinilo)">
+      <div class="show">
+        <div class="desk rv"><div class="chrome" aria-hidden="true"><i><b></b><b></b><b></b></i><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>gaboce.github.io/AlePeraltapagina</span></div><div class="screen"><img src="/img/webs/aleperalta-pc.jpg" alt="Landing de Ale Peralta vista en la compu" width="1440" height="900" loading="lazy"></div></div>
+        <div class="phone rv"><div class="screen"><img src="/img/webs/aleperalta-cel.jpg" alt="Landing de Ale Peralta vista en el celular" width="390" height="664" loading="lazy"></div></div>
+      </div>
+      <div class="info rv">
+        <span class="num" aria-hidden="true">05</span>
+        <span class="tag">Landing</span>
+        <h2>Ale Peralta</h2>
+        <p>Landing de mantenimiento anual de piletas en Villa Carlos Paz, con pedido de visita por WhatsApp.</p>
+        <span class="dom">gaboce.github.io/AlePeraltapagina</span>
+        <a class="visit" href="https://gaboce.github.io/AlePeraltapagina/" target="_blank" rel="noopener">Visitar web <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+      </div>
+    </article>
+
+    <article class="case" id="lm" style="--c:var(--maps)">
+      <div class="show">
+        <div class="desk rv"><div class="chrome" aria-hidden="true"><i><b></b><b></b><b></b></i><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>lmservicios.pages.dev</span></div><div class="screen"><img src="/img/webs/lm-pc.jpg" alt="Web de L&amp;M Servicios Eléctricos vista en la compu" width="1440" height="900" loading="lazy"></div></div>
+        <div class="phone rv"><div class="screen"><img src="/img/webs/lm-cel.jpg" alt="Web de L&amp;M Servicios Eléctricos vista en el celular" width="390" height="664" loading="lazy"></div></div>
+      </div>
+      <div class="info rv">
+        <span class="num" aria-hidden="true">06</span>
+        <span class="tag">Servicios</span>
+        <h2>L&amp;M Servicios Eléctricos</h2>
+        <p>Electricidad, refrigeración y seguridad a domicilio en Mar del Plata, con pedido de presupuesto por WhatsApp.</p>
+        <span class="dom">lmservicios.pages.dev</span>
+        <a class="visit" href="https://lmservicios.pages.dev/" target="_blank" rel="noopener">Visitar web <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+      </div>
+    </article>
+  </main>
+
+  <section class="end" id="pedir">
+    <div class="wrap">
+      <div class="ct rv">
+        <p class="eyebrow">Tu web</p>
+        <h2>¿Querés la <span class="scr">tuya?</span></h2>
+        <p>Escribime por WhatsApp y te cuento cómo arrancamos. Si ya tenés todo a mano, completá el formulario con los datos de tu negocio.</p>
+        <div class="acts">
+          <a class="btn btn-wa" href="https://wa.me/5492233040480?text=Hola%20Gabriel%2C%20vi%20tus%20webs%20y%20quiero%20una%20p%C3%A1gina%20para%20mi%20negocio" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2.1 1-2.4c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.3.5-.4.5c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.1 1 2.1 1.3 2.4 1.5.3.1.5.1.7-.1l1-1.2c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg>Pedime tu web por WhatsApp</a>
+          <a class="btn btn-ghost" href="/arranquemos/">Completar el formulario <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="wrap foot"><span>Gabriel Asa · Mar del Plata</span><a href="/">Ver todos mis servicios →</a></footer>
+</div>
+
+<a class="fab" href="https://wa.me/5492233040480?text=Hola%20Gabriel%2C%20vi%20tus%20webs%20y%20quiero%20hacer%20una%20consulta" target="_blank" rel="noopener" aria-label="Escribime por WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2.1 1-2.4c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.3.5-.4.5c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.1 1 2.1 1.3 2.4 1.5.3.1.5.1.7-.1l1-1.2c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg></a>
+
+<script>(function(){
+  var rm=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(rm||!('IntersectionObserver' in window))return;
+  document.documentElement.classList.add('js');
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{rootMargin:'0px 0px -12% 0px'});
+  document.querySelectorAll('.rv').forEach(function(el){io.observe(el);});
+})();</script>
+</body>
+</html>

@@ -35,7 +35,7 @@ async function captura(w, ctxOpts, file) {
 
 for (const w of webs) {
   const pc = await captura(w, { viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1 }, `img/webs/${w.id}-pc.jpg`);
-  const cel = await captura(w, { ...devices['iPhone 13'] }, `img/webs/${w.id}-cel.jpg`);
+  const cel = await captura(w, { ...devices['iPhone 13'], deviceScaleFactor: 2 }, `img/webs/${w.id}-cel.jpg`);
   informe.push({ id: w.id, url: w.url, pc, cel });
   console.log(w.id, pc.status, pc.final, pc.title, pc.error || '');
 }
