@@ -1,0 +1,25 @@
+name: Capturas del portfolio de webs
+# Saca de nuevo las capturas de img/webs/ cada vez que se toca la lista de webs.
+# También se puede correr a mano desde la pestaña "Actions" de GitHub.
+on:
+  push:
+    paths: ['tools/capturas.mjs', '.github/workflows/capturas.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  capturas:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - run: npm i --no-save playwright@1.48.2 && npx playwright install --with-deps chromium
+      - run: node tools/capturas.mjs
+      - name: Guardar capturas
+        run: |
+          git config user.name "capturas-bot"
+          git config user.email "capturas-bot@users.noreply.github.com"
+          git add img/webs
+          git diff --cached --quiet || git commit -m "Actualiza capturas del portfolio de webs"
+          git push
