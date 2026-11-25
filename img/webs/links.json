@@ -1,0 +1,101 @@
+{
+  "fecha": "2026-11-25T21:27:44.739Z",
+  "webs": [
+    {
+      "id": "aires",
+      "url": "https://aires.gabrielasa.com.ar/",
+      "pc": {
+        "status": 200,
+        "final": "https://aires.gabrielasa.com.ar/",
+        "title": "Remeras aires",
+        "error": ""
+      },
+      "cel": {
+        "status": 200,
+        "final": "https://aires.gabrielasa.com.ar/",
+        "title": "Remeras aires",
+        "error": ""
+      }
+    },
+    {
+      "id": "marderock",
+      "url": "https://marderock.com.ar/",
+      "pc": {
+        "status": 200,
+        "final": "https://marderock.com.ar/",
+        "title": "Mar de Rock Guía",
+        "error": ""
+      },
+      "cel": {
+        "status": 200,
+        "final": "https://marderock.com.ar/",
+        "title": "Mar de Rock Guía",
+        "error": ""
+      }
+    },
+    {
+      "id": "fotos",
+      "url": "https://fotos.gabrielasa.com.ar/",
+      "pc": {
+        "status": 200,
+        "final": "https://fotos.gabrielasa.com.ar/",
+        "title": "Gabriel Asa Fotografía",
+        "error": ""
+      },
+      "cel": {
+        "status": 200,
+        "final": "https://fotos.gabrielasa.com.ar/",
+        "title": "Gabriel Asa Fotografía",
+        "error": ""
+      }
+    },
+    {
+      "id": "canciones",
+      "url": "https://canciones.gabrielasa.com.ar/",
+      "pc": {
+        "status": 200,
+        "final": "https://canciones.gabrielasa.com.ar/",
+        "title": "Sala de Escucha",
+        "error": ""
+      },
+      "cel": {
+        "status": 200,
+        "final": "https://canciones.gabrielasa.com.ar/",
+        "title": "Sala de Escucha",
+        "error": ""
+      }
+    },
+    {
+      "id": "aleperalta",
+      "url": "https://gaboce.github.io/AlePeraltapagina/",
+      "pc": {
+        "status": 200,
+        "final": "https://gaboce.github.io/AlePeraltapagina/",
+        "title": "Ale Peralta · Mantenimiento de piletas en Villa Carlos Paz",
+        "error": ""
+      },
+      "cel": {
+        "status": 200,
+        "final": "https://gaboce.github.io/AlePeraltapagina/",
+        "title": "Ale Peralta · Mantenimiento de piletas en Villa Carlos Paz",
+        "error": ""
+      }
+    },
+    {
+      "id": "lm",
+      "url": "https://lmservicios.pages.dev/",
+      "pc": {
+        "status": 200,
+        "final": "https://lmservicios.pages.dev/",
+        "title": "L&M Servicios Eléctricos · Electricista en Mar del Plata",
+        "error": ""
+      },
+      "cel": {
+        "status": 200,
+        "final": "https://lmservicios.pages.dev/",
+        "title": "L&M Servicios Eléctricos · Electricista en Mar del Plata",
+        "error": ""
+      }
+    }
+  ]
+}
