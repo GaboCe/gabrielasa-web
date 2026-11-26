@@ -420,5 +420,21 @@ cards.forEach(function(c){c.addEventListener('click',function(){
 });});
 })();</script>
 
+<script>
+/* Mail: muchas compus no tienen un programa de correo configurado y el link no abre nada.
+   Al tocarlo, además de intentar abrir el correo, se copia la dirección y avisa. */
+(function(){
+  var t=document.createElement('div');t.setAttribute('role','status');
+  t.style.cssText='position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:999;background:#111;color:#fff;padding:10px 16px;border-radius:8px;font:500 14px/1.3 system-ui,sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.3);opacity:0;transition:opacity .25s;pointer-events:none;max-width:90vw;text-align:center';
+  document.body.appendChild(t);var h;
+  document.querySelectorAll('a[href^="mailto:"]').forEach(function(a){
+    a.addEventListener('click',function(){
+      var mail=a.getAttribute('href').replace('mailto:','').split('?')[0];
+      var ok=function(){t.textContent='Mail copiado: '+mail;t.style.opacity=1;clearTimeout(h);h=setTimeout(function(){t.style.opacity=0},2600)};
+      if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(mail).then(ok,function(){});
+    });
+  });
+})();
+</script>
 </body>
 </html>
