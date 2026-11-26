@@ -266,6 +266,29 @@ button.card{font:inherit;color:inherit;text-align:left;cursor:pointer;padding:0;
 .dl:hover{background:color-mix(in srgb,var(--c) 15%,transparent)}
 .dl.off{opacity:.45;cursor:default}
 @media (max-width:640px){.detail{grid-template-columns:1fr;padding:20px}.card .h{font-size:1.15rem;overflow-wrap:anywhere}.card{min-height:210px}}
+
+/* Ajustes UX nov 2026: línea en cada tarjeta, celu más prolijo y pie de página */
+.card .ds{color:#c3c7ce;font-size:.84rem;line-height:1.35;margin-bottom:2px}
+.card{min-height:270px}
+@media (max-width:640px){
+  .card{min-height:268px}.card .ds{font-size:.78rem}
+  .cards .card:nth-child(5){grid-column:1/-1;min-height:236px}
+  .orbit{width:min(78%,310px)}
+  .node{transform:rotate(var(--a)) translate(min(31vw,124px)) rotate(calc(-1 * var(--a)))}
+}
+.contact{padding-bottom:56px}
+.foot{position:relative;z-index:2;border-top:1px solid var(--line);padding-block:44px 110px;color:var(--muted);font-size:.92rem}
+.foot .fg{display:grid;grid-template-columns:minmax(0,1.4fr) repeat(3,minmax(0,1fr));gap:32px}
+.foot .fb .brand{color:var(--fg)}
+.foot .fb p{margin-top:12px;max-width:34ch}
+.foot .fc{display:flex;flex-direction:column;gap:9px;min-width:0}
+.foot .fk{font-stretch:125%;font-weight:700;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--fg);margin-bottom:4px}
+.foot .fc a{overflow-wrap:anywhere;transition:color .2s}
+.foot .fc a:hover{color:var(--fg)}
+.foot .fig{display:inline-flex;align-items:center;gap:8px}.foot .fig svg{width:20px;height:20px;color:#e1306c;flex:none}
+.foot .fl{margin-top:36px;padding-top:18px;border-top:1px solid var(--line);font-size:.8rem}
+@media (max-width:860px){.foot .fg{grid-template-columns:1fr 1fr}.foot .fb{grid-column:1/-1}}
+@media (max-width:460px){.foot .fg{grid-template-columns:1fr;gap:26px}}
 </style>
 </head>
 <body>
@@ -277,16 +300,16 @@ button.card{font:inherit;color:inherit;text-align:left;cursor:pointer;padding:0;
   <header class="top">
     <div class="wrap bar">
       <a class="brand" href="#"><i aria-hidden="true"><b style="background:var(--web)"></b><b style="background:var(--maps)"></b><b style="background:var(--remeras)"></b><b style="background:var(--vinilo)"></b><b style="background:var(--pc)"></b></i>Gabriel Asa</a>
-      <nav class="pill" aria-label="Secciones"><a class="on" href="#">Inicio</a><a href="#servicios">Servicios</a><a href="#trabajos">Trabajos</a><a href="#proceso">Pasos</a><a href="#contacto">Contacto</a></nav>
+      <nav class="pill" aria-label="Secciones"><a href="#servicios">Servicios</a><a href="#trabajos">Trabajos</a><a href="/webs/">Mis webs</a><a href="#contacto">Contacto</a></nav>
     </div>
   </header>
 
   <section class="hero">
     <div class="wrap hero-in">
       <div>
-        <p class="eyebrow">Mar del Plata · todo el país</p>
+        <p class="eyebrow">Mar del Plata · todo el país · desde 2015</p>
         <h1>Tu negocio,<br>siempre <span class="scr">activo.</span></h1>
-        <p class="lead">Me ocupo de que tu negocio esté siempre activo: <strong>presencia en internet, gráfica, indumentaria y mantenimiento de PC.</strong> Un solo contacto para todo.</p>
+        <p class="lead"><strong>Presencia en internet, gráfica, indumentaria y mantenimiento de PC</strong> para comercios y emprendimientos. Un solo contacto para todo.</p>
         <div class="cta">
           <a class="btn btn-wa" href="https://wa.me/5492233040480?text=Hola%20Gabriel%2C%20quiero%20pedir%20un%20presupuesto" target="_blank" rel="noopener">Pedir presupuesto <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         </div>
@@ -309,11 +332,11 @@ button.card{font:inherit;color:inherit;text-align:left;cursor:pointer;padding:0;
     <div class="wrap">
       <div class="svc-h"><h2>Mis servicios</h2></div>
       <div class="cards">
-        <button type="button" class="card" id="c-web" aria-expanded="false" aria-controls="d-web" style="--c:var(--web)"><span class="cic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M7 6.5h.01M10 6.5h.01"/></svg></span><div class="in"><span class="tag">Páginas web</span><span class="h">Tu web propia</span><span class="go"><span class="t1">Ver más</span><span class="t2">Cerrar</span><i aria-hidden="true">+</i></span></div></button>
-        <button type="button" class="card" id="c-maps" aria-expanded="false" aria-controls="d-maps" style="--c:var(--maps)"><span class="cic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-6-5.6-6-11a6 6 0 1 1 12 0c0 5.4-6 11-6 11z"/><circle cx="12" cy="10" r="2.2"/></svg></span><div class="in"><span class="tag">Google Maps</span><span class="h">Que te encuentren</span><span class="go"><span class="t1">Ver más</span><span class="t2">Cerrar</span><i aria-hidden="true">+</i></span></div></button>
-        <button type="button" class="card" id="c-remeras" aria-expanded="false" aria-controls="d-remeras" style="--c:var(--remeras)"><span class="cic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3 3 6l2 4 2-1v12h10V9l2 1 2-4-5-3a4 4 0 0 1-8 0z"/></svg></span><div class="in"><span class="tag">Estampados</span><span class="h">Tu marca puesta</span><span class="go"><span class="t1">Ver más</span><span class="t2">Cerrar</span><i aria-hidden="true">+</i></span></div></button>
-        <button type="button" class="card" id="c-vinilo" aria-expanded="false" aria-controls="d-vinilo" style="--c:var(--vinilo)"><span class="cic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M12 3v18M6.5 9h3M14.5 9h3M6 15l3 3M15 14h3"/></svg></span><div class="in"><span class="tag">Vinilos</span><span class="h">Vidrieras que hablan</span><span class="go"><span class="t1">Ver más</span><span class="t2">Cerrar</span><i aria-hidden="true">+</i></span></div></button>
-        <button type="button" class="card" id="c-pc" aria-expanded="false" aria-controls="d-pc" style="--c:var(--pc)"><span class="cic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="7" width="10" height="10" rx="1.5"/><path d="M10 7V3M14 7V3M10 21v-4M14 21v-4M7 10H3M7 14H3M21 10h-4M21 14h-4"/></svg></span><div class="in"><span class="tag">Reparación de PC</span><span class="h">Que no te frene</span><span class="go"><span class="t1">Ver más</span><span class="t2">Cerrar</span><i aria-hidden="true">+</i></span></div></button>
+        <button type="button" class="card" id="c-web" aria-expanded="false" aria-controls="d-web" style="--c:var(--web)"><span class="cic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M7 6.5h.01M10 6.5h.01"/></svg></span><div class="in"><span class="tag">Páginas web</span><span class="h">Tu web propia</span><span class="ds">Una página simple, pensada para el celular, con botón a tu WhatsApp.</span><span class="go"><span class="t1">Ver más</span><span class="t2">Cerrar</span><i aria-hidden="true">+</i></span></div></button>
+        <button type="button" class="card" id="c-maps" aria-expanded="false" aria-controls="d-maps" style="--c:var(--maps)"><span class="cic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-6-5.6-6-11a6 6 0 1 1 12 0c0 5.4-6 11-6 11z"/><circle cx="12" cy="10" r="2.2"/></svg></span><div class="in"><span class="tag">Google Maps</span><span class="h">Que te encuentren</span><span class="ds">Que aparezcas en Google Maps cuando buscan lo que vendés en tu zona.</span><span class="go"><span class="t1">Ver más</span><span class="t2">Cerrar</span><i aria-hidden="true">+</i></span></div></button>
+        <button type="button" class="card" id="c-remeras" aria-expanded="false" aria-controls="d-remeras" style="--c:var(--remeras)"><span class="cic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3 3 6l2 4 2-1v12h10V9l2 1 2-4-5-3a4 4 0 0 1-8 0z"/></svg></span><div class="in"><span class="tag">Estampados</span><span class="h">Tu marca puesta</span><span class="ds">Remeras y buzos estampados para tu local, equipo o evento.</span><span class="go"><span class="t1">Ver más</span><span class="t2">Cerrar</span><i aria-hidden="true">+</i></span></div></button>
+        <button type="button" class="card" id="c-vinilo" aria-expanded="false" aria-controls="d-vinilo" style="--c:var(--vinilo)"><span class="cic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M12 3v18M6.5 9h3M14.5 9h3M6 15l3 3M15 14h3"/></svg></span><div class="in"><span class="tag">Vinilos</span><span class="h">Vidrieras que hablan</span><span class="ds">Horarios, medios de pago y promos en tu vidriera, listos y colocados.</span><span class="go"><span class="t1">Ver más</span><span class="t2">Cerrar</span><i aria-hidden="true">+</i></span></div></button>
+        <button type="button" class="card" id="c-pc" aria-expanded="false" aria-controls="d-pc" style="--c:var(--pc)"><span class="cic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="7" width="10" height="10" rx="1.5"/><path d="M10 7V3M14 7V3M10 21v-4M14 21v-4M7 10H3M7 14H3M21 10h-4M21 14h-4"/></svg></span><div class="in"><span class="tag">Reparación de PC</span><span class="h">Que no te frene</span><span class="ds">Mantenimiento y reparación de las computadoras del local.</span><span class="go"><span class="t1">Ver más</span><span class="t2">Cerrar</span><i aria-hidden="true">+</i></span></div></button>
         <div class="detail" id="d-web" role="region" aria-labelledby="c-web" style="--c:var(--web)" hidden><div class="dt"><p class="dz">Todo el país</p><p>Una página simple y rápida, pensada para el celular, con todo lo que tu cliente busca antes de escribirte: qué hacés, precios, horarios, ubicación y un botón directo a tu WhatsApp.</p></div><div class="df"><p class="dp">Desde <strong>$80.000</strong> · pago único</p><div class="dls"><a class="dl" href="/precios-web/">Ver precios →</a><a class="dl" href="/webs/">Ver mis webs →</a></div></div></div>
         <div class="detail" id="d-maps" role="region" aria-labelledby="c-maps" style="--c:var(--maps)" hidden><div class="dt"><p class="dz">Todo el país</p><p>Creo tu perfil desde cero o pongo al día el que ya tenés, para que aparezcas cuando alguien busca lo que vendés en tu zona.</p><ul><li>Alta y verificación del perfil</li><li>Fotos, horarios y datos al día</li><li>Promos y novedades en el perfil</li></ul></div><div class="df"><div class="dls"><a class="dl" href="#t-maps">Ver ejemplo →</a></div></div></div>
         <div class="detail" id="d-remeras" role="region" aria-labelledby="c-remeras" style="--c:var(--remeras)" hidden><div class="dt"><p class="dz">Todo el país</p><p>Remeras y buzos estampados para el personal del local, eventos o tu emprendimiento. Hechos en mi taller, con envíos a todo el país.</p></div><div class="df"><p class="dp">Precio por cantidad</p><div class="dls"><a class="dl" href="#t-remeras">Ver ejemplo →</a></div></div></div>
@@ -329,7 +352,7 @@ button.card{font:inherit;color:inherit;text-align:left;cursor:pointer;padding:0;
       <div class="works">
         <article class="work" id="t-web" style="--c:var(--web)"><div class="media"><img src="img/marderock.jpg" alt="Web de Mar de Rock en el celular" style="object-position:top"></div><div class="wi"><span class="tag">Página web</span><h3>Mar de Rock</h3><p>Guía de bandas, bares y salas de Mar del Plata, con agenda semanal de shows y formulario para cargar fechas.</p><a class="lnk" href="https://marderock.com.ar" target="_blank" rel="noopener">Ver web →</a></div></article>
         <article class="work" id="t-maps" style="--c:var(--maps)"><div class="media"><img src="img/claudio.jpg" alt="Perfil de CL-Audio en Google Maps, 5 estrellas" style="object-position:center 35%"></div><div class="wi"><span class="tag">Google Maps</span><h3>CL-Audio</h3><p>San Telmo, CABA. No aparecía en Google Maps: perfil armado desde cero.</p><a class="lnk" href="https://www.google.com/maps/search/?api=1&amp;query=CL%20Audio%20San%20Telmo" target="_blank" rel="noopener">Ver en Maps →</a></div></article>
-        <article class="work" id="t-vinilo" style="--c:var(--vinilo)"><div class="media ba"><img src="img/gsn-antes.jpg" alt="Puerta antes, sin vinilo"><img src="img/gsn-despues.jpg" alt="La misma puerta con el vinilo de GSN Salud"><span class="b1">Antes</span><span class="b2">Después</span></div><div class="wi"><span class="tag">Vinilos</span><h3>GSN Salud</h3><p>Puerta completa en vinilo impreso.</p></div></article>
+        <article class="work" id="t-vinilo" style="--c:var(--vinilo)"><div class="media ba"><img src="img/gsn-antes.jpg" alt="Puerta antes, sin vinilo"><img src="img/gsn-despues.jpg" alt="La misma puerta con el vinilo de GSN Salud"><span class="b1">Antes</span><span class="b2">Después</span></div><div class="wi"><span class="tag">Vinilos</span><h3>GSN Salud</h3><p>Puerta completa en vinilo impreso.</p><a class="lnk" href="https://www.instagram.com/gabriel.asa.comercial/" target="_blank" rel="noopener">Ver en Instagram →</a></div></article>
         <article class="work" id="t-remeras" style="--c:var(--remeras)"><div class="media ba"><img src="img/taller.jpg" alt="Plancha de estampado en el taller"><img src="img/bowling.jpg" alt="Buzos estampados de Bowling de Paso" style="object-position:75% center"></div><div class="wi"><span class="tag">Estampados</span><h3>Bowling de Paso</h3><p>Buzos estampados para el equipo, hechos en mi taller.</p><a class="lnk" href="https://www.instagram.com/reel/DbYm04oOXPE/" target="_blank" rel="noopener">Ver producción →</a></div></article>
       </div>
       <div class="more"><a class="ig-big" href="/webs/" style="--c:var(--web)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M7 6.5h.01M10 6.5h.01"/></svg><span>Ver mis webs</span></a><a class="ig-big" href="https://www.instagram.com/gabriel.asa.comercial/" target="_blank" rel="noopener" style="--c:#e1306c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r=".6" fill="currentColor"/></svg><span>Ver más trabajos</span></a></div>
@@ -364,6 +387,22 @@ button.card{font:inherit;color:inherit;text-align:left;cursor:pointer;padding:0;
       </div>
     </div>
   </section>
+
+  <footer class="foot">
+    <div class="wrap">
+      <div class="fg">
+        <div class="fb">
+          <a class="brand" href="#"><i aria-hidden="true"><b style="background:var(--web)"></b><b style="background:var(--maps)"></b><b style="background:var(--remeras)"></b><b style="background:var(--vinilo)"></b><b style="background:var(--pc)"></b></i>Gabriel Asa</a>
+          <p>Servicios para comercios y emprendimientos. Desde Mar del Plata a toda la Argentina.</p>
+        </div>
+        <nav class="fc" aria-label="Secciones del sitio"><p class="fk">Secciones</p><a href="#servicios">Servicios</a><a href="#trabajos">Trabajos</a><a href="/webs/">Mis webs</a><a href="/precios-web/">Precios web</a></nav>
+        <div class="fc"><p class="fk">Contacto</p><a href="https://wa.me/5492233040480?text=Hola%20Gabriel%2C%20quiero%20hacer%20una%20consulta" target="_blank" rel="noopener">WhatsApp 223 3040-480</a><a href="mailto:gabriel.asa.mdp@gmail.com">gabriel.asa.mdp@gmail.com</a><span>Lunes a viernes, de 10 a 18 hs</span></div>
+        <div class="fc"><p class="fk">Instagram</p><a class="fig" href="https://www.instagram.com/gabriel.asa.comercial/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r=".6" fill="currentColor"/></svg>@gabriel.asa.comercial</a></div>
+      </div>
+      <p class="fl">© 2026 Gabriel Asa · Mar del Plata, Buenos Aires</p>
+    </div>
+  </footer>
+
 
 </div>
 <a class="fab" href="https://wa.me/5492233040480?text=Hola%20Gabriel%2C%20quiero%20hacer%20una%20consulta" target="_blank" rel="noopener" aria-label="Escribime por WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2.1 1-2.4c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.3.5-.4.5c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.1 1 2.1 1.3 2.4 1.5.3.1.5.1.7-.1l1-1.2c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg></a>
