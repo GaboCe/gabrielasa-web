@@ -11,6 +11,7 @@ const webs = [
   { id: 'canciones', url: 'https://canciones.gabrielasa.com.ar/' },
   { id: 'aleperalta',url: 'https://gaboce.github.io/AlePeraltapagina/' },
   { id: 'lm',        url: 'https://lmservicios.pages.dev/' },
+  { id: 'otramirada', url: 'https://otra-mirada.pages.dev/' },
 ];
 
 mkdirSync('img/webs', { recursive: true });
