@@ -146,6 +146,12 @@ img{display:block;max-width:100%}
   .js .rv,.js .case .phone.rv{opacity:1;transform:none;transition:none}
   .screen img,.phone,.visit,.visit svg,.btn{transition:none}
 }
+/* Botón volver arriba (igual que en la página principal) */
+.totop{position:fixed;z-index:20;right:calc(28px + env(safe-area-inset-right,0px));bottom:calc(90px + env(safe-area-inset-bottom,0px));width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:rgba(16,18,22,.8);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.18);color:var(--fg);transition:transform .2s,border-color .2s}
+.totop[hidden]{display:none}
+.totop svg{width:18px;height:18px}
+.totop:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.4)}
+@media (prefers-reduced-motion:reduce){.totop{transition:none}}
 </style>
 </head>
 <body>
@@ -287,6 +293,7 @@ img{display:block;max-width:100%}
   <footer class="wrap foot"><span>Gabriel Asa · Mar del Plata</span><a href="/">Ver todos mis servicios →</a></footer>
 </div>
 
+<a class="totop" id="totop" href="#" aria-label="Volver arriba" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg></a>
 <a class="fab" href="https://wa.me/5492233040480?text=Hola%20Gabriel%2C%20vi%20tus%20webs%20y%20quiero%20hacer%20una%20consulta" target="_blank" rel="noopener" aria-label="Escribime por WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2.1 1-2.4c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.3.5-.4.5c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.1 1 2.1 1.3 2.4 1.5.3.1.5.1.7-.1l1-1.2c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg></a>
 
 <script>(function(){
@@ -296,5 +303,6 @@ img{display:block;max-width:100%}
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{rootMargin:'0px 0px -12% 0px'});
   document.querySelectorAll('.rv').forEach(function(el){io.observe(el);});
 })();</script>
+<script>(function(){var b=document.getElementById('totop');function f(){b.hidden=window.scrollY<300;}window.addEventListener('scroll',f,{passive:true});f();b.addEventListener('click',function(e){e.preventDefault();window.scrollTo({top:0,behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});});})();</script>
 </body>
 </html>
