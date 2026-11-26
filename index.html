@@ -272,7 +272,8 @@ button.card{font:inherit;color:inherit;text-align:left;cursor:pointer;padding:0;
 .card{min-height:270px}
 @media (max-width:640px){
   .card{min-height:268px}.card .ds{font-size:.78rem}
-  .cards .card:nth-child(5){grid-column:1/-1;min-height:236px}
+  /* siempre: 2 arriba, Estampados a lo ancho, 2 abajo (por id, así no cambia al abrir "Ver más") */
+  .cards #c-remeras{grid-column:1/-1;min-height:236px;aspect-ratio:auto}
   .orbit{width:min(78%,310px)}
   .node{transform:rotate(var(--a)) translate(min(31vw,124px)) rotate(calc(-1 * var(--a)))}
 }
