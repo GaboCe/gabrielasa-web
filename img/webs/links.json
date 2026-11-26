@@ -1,5 +1,5 @@
 {
-  "fecha": "2026-11-25T21:58:13.673Z",
+  "fecha": "2026-11-26T18:45:19.572Z",
   "webs": [
     {
       "id": "aires",
@@ -39,13 +39,13 @@
       "pc": {
         "status": 200,
         "final": "https://fotos.gabrielasa.com.ar/",
-        "title": "Gabriel Asa Fotografía",
+        "title": "Fotos en vivo · Gabriel Asa",
         "error": ""
       },
       "cel": {
         "status": 200,
         "final": "https://fotos.gabrielasa.com.ar/",
-        "title": "Gabriel Asa Fotografía",
+        "title": "Fotos en vivo · Gabriel Asa",
         "error": ""
       }
     },
@@ -94,6 +94,22 @@
         "status": 200,
         "final": "https://lmservicios.pages.dev/",
         "title": "L&M Servicios Eléctricos · Electricista en Mar del Plata",
+        "error": ""
+      }
+    },
+    {
+      "id": "otramirada",
+      "url": "https://otra-mirada.pages.dev/",
+      "pc": {
+        "status": 200,
+        "final": "https://otra-mirada.pages.dev/",
+        "title": "Otra Mirada",
+        "error": ""
+      },
+      "cel": {
+        "status": 200,
+        "final": "https://otra-mirada.pages.dev/",
+        "title": "Otra Mirada",
         "error": ""
       }
     }
