@@ -1,6 +1,6 @@
 // Saca las capturas del portfolio (compu y celu) desde las webs reales
 // y deja un informe de cada link en img/webs/links.json.
-// Se corre solo en GitHub Actions (ver .github/workflows/capturas.yml). Última tanda: 28/11/2026 (4).
+// Se corre solo en GitHub Actions (ver .github/workflows/capturas.yml). Última tanda: 28/11/2026 (5).
 import { chromium, devices } from 'playwright';
 import { writeFileSync, mkdirSync } from 'node:fs';
 
