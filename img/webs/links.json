@@ -1,5 +1,5 @@
 {
-  "fecha": "2026-11-26T18:45:19.572Z",
+  "fecha": "2026-11-28T05:11:34.259Z",
   "webs": [
     {
       "id": "aires",
@@ -103,13 +103,29 @@
       "pc": {
         "status": 200,
         "final": "https://otra-mirada.pages.dev/",
-        "title": "Otra Mirada",
+        "title": "Otra Mirada · Una mirada desde la Biblia para cómo te sentís hoy",
         "error": ""
       },
       "cel": {
         "status": 200,
         "final": "https://otra-mirada.pages.dev/",
-        "title": "Otra Mirada",
+        "title": "Otra Mirada · Una mirada desde la Biblia para cómo te sentís hoy",
+        "error": ""
+      }
+    },
+    {
+      "id": "lajuanita",
+      "url": "https://la-juanita-rock.pages.dev/",
+      "pc": {
+        "status": 200,
+        "final": "https://la-juanita-rock.pages.dev/",
+        "title": "La Juanita Rock and Punk",
+        "error": ""
+      },
+      "cel": {
+        "status": 200,
+        "final": "https://la-juanita-rock.pages.dev/",
+        "title": "La Juanita Rock and Punk",
         "error": ""
       }
     }
