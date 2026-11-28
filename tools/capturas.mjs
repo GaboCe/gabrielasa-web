@@ -12,6 +12,7 @@ const webs = [
   { id: 'aleperalta',url: 'https://gaboce.github.io/AlePeraltapagina/' },
   { id: 'lm',        url: 'https://lmservicios.pages.dev/' },
   { id: 'otramirada', url: 'https://otra-mirada.pages.dev/' },
+  { id: 'lajuanita', url: 'https://la-juanita-rock.pages.dev/' },
 ];
 
 mkdirSync('img/webs', { recursive: true });
